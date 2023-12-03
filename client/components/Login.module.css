@@ -28,13 +28,13 @@ a>h2 {
     color: rgba(255, 255, 255, 0.87);
 }
 
-.loginContainer>h1 {
+.containerTitle {
     font-size: 40px;
     margin: 60px 0 40px  0;
     color: rgb(255, 255, 255);
 }
 
-.inputContainer>p {
+.signup {
     margin: 10px 0 0 0;
 }
 
@@ -74,18 +74,18 @@ a>h2 {
     outline: 2px solid #646cff;
 }
 
-.inputContainer>form>button {
+.Button {
     margin-top: 30px;
     box-shadow: rgb(102, 110, 255, 0.3) 5px 5px 5px;
 }
 
-.inputContainer>form>button:focus,
-.inputContainer>form>button:focus-visible {
+.Button:focus, .Button:focus-visible {
     outline: none;
 }
 
 .invalid {
     margin: 5px 0 0 0;
     font-size: 13px;
+    font-weight: bold;
     color: rgba(200, 24, 24, 0.85);
 }

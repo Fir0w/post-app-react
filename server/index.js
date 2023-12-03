@@ -1,6 +1,5 @@
 import express from 'express';
 import connectDB from './config/db.js';
-import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -8,9 +7,8 @@ connectDB();
 
 const app = express();
 
-//Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.post('/api/login', (req, res) => {
 

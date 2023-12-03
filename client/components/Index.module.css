@@ -24,3 +24,8 @@
         animation: logo-spin infinite 20s linear;
     }
 }
+
+.button {
+    width: 200px;
+    margin: 0 15px 0 15px;
+}
