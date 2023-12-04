@@ -13,7 +13,13 @@ app.use(express.urlencoded({ extended: false }));
 app.post('/api/login', (req, res) => {
 
     console.log(req.body)
-    res.send("he")
+    res.send("login")
+});
+
+app.post('/api/signup', (req, res) => {
+
+    console.log(req.body)
+    res.send("signup")
 });
 
 app.listen(5000, () => console.log(`server is running on http://localhost:5000`));
