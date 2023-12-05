@@ -28,8 +28,8 @@ const Signup = () => {
             try {
                 const res = await axios.post('/api/signup', formData);
                 console.log(res);
+                navigate("/");
             } catch (err) { console.log(err); }
-            navigate("/");
         }
     };
 
