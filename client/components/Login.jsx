@@ -25,8 +25,8 @@ const Login = () => {
             try {
                 const res = await axios.post('/api/login', formData);
                 console.log(res);
+                navigate("/");
             } catch (err) { console.log(err); }
-            navigate("/");
         } else setInvalid(true);  
     };
 
