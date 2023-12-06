@@ -1,0 +1,6 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    height: calc(100% - 100px);
+}

@@ -1,0 +1,38 @@
+.Navbar {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    background-color: #573d3d36;
+    border-radius: 50px;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.img {
+    padding: 25px 0 25px 0;
+    margin-right: 10px;
+}
+
+header {
+    left: 0;
+    position: fixed;
+}
+
+.visible {
+    top: 0;
+    transition: top 0.4s ease-out;
+  }
+  
+  .hidden {
+    top: -100px;
+    transition: top 0.4s ease-out;
+  }
