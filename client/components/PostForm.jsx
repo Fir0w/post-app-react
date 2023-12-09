@@ -12,7 +12,7 @@ const PostForm = () => {
 
         const formData = { message: text }
 
-        if (len >= 0) {
+        if (len >= 0 && len !== 145) {
             try {
                 const res = await axios.post('/api/home/post', formData);
                 console.log(res);
@@ -37,7 +37,7 @@ const PostForm = () => {
                     <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox}>
-                    <span suppressContentEditableWarning={true} onClick={() => setPlaceHolder(false)} className={styles.span} contentEditable={true} onBlur={() => setPlaceHolder(true)} onKeyUp={() => setText(getValue)}>
+                    <span suppressContentEditableWarning={true} onClick={() => setPlaceHolder(false)} className={styles.span} contentEditable={true} onKeyUp={() => setText(getValue)}>
                         <span className={plc} >What&#39;s on your mind?</span>
                     </span>
                 </div>
@@ -46,7 +46,7 @@ const PostForm = () => {
                 <div className={styles.len}>{len}</div>
                 <button className={styles.Button} onClick={postResponse} >Post</button>
             </div>
-        </div>
+        </div >
     );
 };
 

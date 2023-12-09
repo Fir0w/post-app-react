@@ -33,6 +33,8 @@
 }
 
 .spanPlaceholderVisible {
+    position: absolute;
+    display: block;
     z-index: -1;
 }
 
