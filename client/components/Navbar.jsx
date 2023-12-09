@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from './Navbar.module.css'
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
     const [position, setPosition] = useState(window.scrollY);
@@ -7,10 +7,10 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            let moving = window.scrollY
+            let moving = window.scrollY;
 
-            setVisible(position > moving);
-            setPosition(moving)
+            setVisible(position >= moving);
+            setPosition(moving);
         };
         window.addEventListener("scroll", handleScroll);
         return (() => {
@@ -23,7 +23,6 @@ const Navbar = () => {
     return (
         <header className={cls}>
             <div className={styles.Navbar}>
-
                 <a className={styles.home} href="/">
                     <img src="/logo.png" width={100} alt="Post react logo" />
                     <h2>Post React App</h2>
@@ -33,11 +32,11 @@ const Navbar = () => {
                         <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                         <p>Profile Name</p>
                     </a>
-                    <button>Logout</button>
+                    <button className={styles.Button}>Logout</button>
                 </div>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

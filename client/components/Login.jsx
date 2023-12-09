@@ -27,7 +27,7 @@ const Login = () => {
                 console.log(res);
                 navigate("/");
             } catch (err) { console.log(err); }
-        } else setInvalid(true);  
+        } else setInvalid(true);
     };
 
     const validateEmail = (email) => {
@@ -45,7 +45,7 @@ const Login = () => {
 
 
     return (
-        <>
+        <div className={styles.login}>
             <a className={styles.home} href="/">
                 <img src="/logo.png" width={100} alt="Post react logo" />
                 <h2>Post React App</h2>
@@ -69,8 +69,8 @@ const Login = () => {
                     <a href="/signup">Create account</a>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 };
 
 export default Login;

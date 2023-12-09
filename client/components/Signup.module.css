@@ -1,4 +1,10 @@
-.loginContainer {
+.signup {
+    display: flex;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.signupContainer {
     display: flex;
     flex-direction: column;
     width: 500px;
@@ -32,10 +38,6 @@ a>h2 {
     font-size: 40px;
     margin: 60px 0 40px  0;
     color: rgb(255, 255, 255);
-}
-
-.signup {
-    margin: 10px 0 0 0;
 }
 
 .inputContainer>form {
