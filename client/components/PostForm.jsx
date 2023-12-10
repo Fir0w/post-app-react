@@ -1,11 +1,18 @@
 import styles from './PostForm.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PostForm = () => {
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
     const [len, setLen] = useState(145);
+
+    useEffect(() => {
+        setLen(145 - text.length)
+        if (!text.length)
+            setPlaceHolder(true)
+        else setPlaceHolder(false)
+    }, [text.length]);
 
 
     const postResponse = async () => {
@@ -20,13 +27,6 @@ const PostForm = () => {
         }
     };
 
-    const getValue = () => {
-
-        let value = document?.getElementsByClassName(styles.span)[0].innerText
-        setLen(145 - value.length)
-        return value;
-    };
-
     let plc = placeholder ? styles.spanPlaceholderVisible : styles.spanPlaceholderNone;
 
 
@@ -37,14 +37,14 @@ const PostForm = () => {
                     <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox}>
-                    <span suppressContentEditableWarning={true} onClick={() => setPlaceHolder(false)} className={styles.span} contentEditable={true} onKeyUp={() => setText(getValue)}>
-                        <span className={plc} >What&#39;s on your mind?</span>
+                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} onInput={e => setText(e.target.innerText)} >
                     </span>
+                    <span className={plc} >What&#39;s on your mind?</span>
                 </div>
             </div>
             <div className={styles.postButton}>
                 <div className={styles.len}>{len}</div>
-                <button className={styles.Button} onClick={postResponse} >Post</button>
+                <button className={styles.button} onClick={postResponse} >Post</button>
             </div>
         </div >
     );

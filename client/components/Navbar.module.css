@@ -37,7 +37,7 @@ header {
     transition: top 0.4s ease-out;
 }
 
-.Button:focus,
-.Button:focus-visible {
+.button:focus,
+.button:focus-visible {
     outline: none;
 }

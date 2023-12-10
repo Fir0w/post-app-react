@@ -22,6 +22,7 @@
 }
 
 .span {
+    font-size: 18px;
     white-space: pre-wrap;
     text-align: start;
     max-width: 300px;
@@ -49,8 +50,8 @@
     margin: 20px 10px 10px 0;
 }
 
-.Button:focus,
-.Button:focus-visible {
+.button:focus,
+.button:focus-visible {
     outline: none;
 }
 

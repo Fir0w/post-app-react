@@ -77,7 +77,7 @@ const Signup = () => {
                             <input value={inputPassword} type="password" id="password" placeholder='Password' autoComplete='on' maxLength={16} onChange={(e) => setInputPassword(e.target.value)} onBlur={e => validatePassword(e.target.value) ? setInvalidPassword(false) : setInvalidPassword(true)} />
                             {invalidPassword && <p className={styles.invalid}>Invalid Password</p>}
                         </label>
-                        <button className={styles.Button} type='submit'>Register</button>
+                        <button className={styles.button} type='submit'>Register</button>
                     </form>
                 </div>
             </div>
