@@ -32,7 +32,7 @@ const Navbar = () => {
                         <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                         <p>Profile Name</p>
                     </a>
-                    <button className={styles.Button}>Logout</button>
+                    <button className={styles.button}>Logout</button>
                 </div>
             </div>
         </header>

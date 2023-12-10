@@ -1,7 +1,4 @@
 main {
-    /* display: flex;
-    flex-direction: column;
-    place-content: center; */
     padding-top: 120px;
     width: calc(100vw - 17px);
     min-height: 100vh;

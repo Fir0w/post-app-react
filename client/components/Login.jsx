@@ -63,7 +63,7 @@ const Login = () => {
                             <input value={inputPassword} type="password" id="password" placeholder='Password' autoComplete='on' minLength={8} maxLength={16} onChange={(e) => setInputPassword(e.target.value)} />
                         </label>
                         {invalid && <p className={styles.invalid}>Invalid email or Password</p>}
-                        <button className={styles.Button} type='submit'>Submit</button>
+                        <button className={styles.button} type='submit'>Submit</button>
                     </form>
                     <p className={styles.signup}>Don&#39;t have an account?</p>
                     <a href="/signup">Create account</a>
