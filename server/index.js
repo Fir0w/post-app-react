@@ -22,4 +22,10 @@ app.post('/api/signup', (req, res) => {
     res.send("signup")
 });
 
+app.post('/api/home/post', (req, res) => {
+
+    console.log(req.body)
+    res.send("post")
+});
+
 app.listen(5000, () => console.log(`server is running on http://localhost:5000`));

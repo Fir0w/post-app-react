@@ -30,9 +30,14 @@ header {
 .visible {
     top: 0;
     transition: top 0.4s ease-out;
-  }
-  
-  .hidden {
+}
+
+.hidden {
     top: -100px;
     transition: top 0.4s ease-out;
-  }
+}
+
+.button:focus,
+.button:focus-visible {
+    outline: none;
+}

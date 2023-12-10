@@ -1,0 +1,65 @@
+.postContainer {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgba(59, 59, 59, 0.85);
+    margin: 0 auto;
+    position: relative;
+    border-radius: 15px;
+}
+
+.PostForm {
+    display: flex;
+    margin: 10px 0 0 10px;
+    position: relative;
+}
+
+.formBox {
+    display: flex;
+    overflow: hidden;
+    width: 300px;
+    margin: 13px 0 0 15px;
+}
+
+.span {
+    font-size: 18px;
+    white-space: pre-wrap;
+    text-align: start;
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.span:focus-visible {
+    outline: 0;
+}
+
+.spanPlaceholderVisible {
+    position: absolute;
+    display: block;
+    z-index: -1;
+}
+
+.spanPlaceholderNone {
+    display: none;
+}
+
+.postButton {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 20px 10px 10px 0;
+}
+
+.button:focus,
+.button:focus-visible {
+    outline: none;
+}
+
+.len {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin: 0 10px 0 0;
+    padding: 0 10px 0 0;
+    border-right: solid 2px;
+}

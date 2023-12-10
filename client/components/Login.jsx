@@ -27,7 +27,7 @@ const Login = () => {
                 console.log(res);
                 navigate("/");
             } catch (err) { console.log(err); }
-        } else setInvalid(true);  
+        } else setInvalid(true);
     };
 
     const validateEmail = (email) => {
@@ -45,7 +45,7 @@ const Login = () => {
 
 
     return (
-        <>
+        <div className={styles.login}>
             <a className={styles.home} href="/">
                 <img src="/logo.png" width={100} alt="Post react logo" />
                 <h2>Post React App</h2>
@@ -63,14 +63,14 @@ const Login = () => {
                             <input value={inputPassword} type="password" id="password" placeholder='Password' autoComplete='on' minLength={8} maxLength={16} onChange={(e) => setInputPassword(e.target.value)} />
                         </label>
                         {invalid && <p className={styles.invalid}>Invalid email or Password</p>}
-                        <button className={styles.Button} type='submit'>Submit</button>
+                        <button className={styles.button} type='submit'>Submit</button>
                     </form>
                     <p className={styles.signup}>Don&#39;t have an account?</p>
                     <a href="/signup">Create account</a>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 };
 
 export default Login;
