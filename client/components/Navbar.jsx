@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <header className={cls}>
-            <div className={styles.Navbar}>
+            <div className={styles.navbar}>
                 <a className={styles.home} href="/">
                     <img src="/logo.png" width={100} alt="Post react logo" />
                     <h2>Post React App</h2>

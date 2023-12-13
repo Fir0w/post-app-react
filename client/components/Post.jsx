@@ -1,11 +1,11 @@
 import styles from './Post.module.css';
 
-const Post = ({ profileImg, proflieName, postContent, upVote, downVote, comment, timeStamp }) => {
+const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment, timeStamp }) => {
 
     // for place holder purposes only
     const data = {
         profileImg: "https://cdn-icons-png.flaticon.com/512/3899/3899618.png",
-        proflieName: "Profile Name",
+        profileName: "Profile Name",
         postContent: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur sunt quibusdam nam illo eveniet aliquid?",
         upVote: "Up Vote",
         downVote: "Down Vote",
@@ -23,7 +23,7 @@ const Post = ({ profileImg, proflieName, postContent, upVote, downVote, comment,
                 </div>
                 <div>
                     <a className={styles.profileName} href="">
-                        <div>{data.proflieName}</div>
+                        <div>{data.profileName}</div>
                     </a>
                     <div className={styles.postContent}>{data.postContent}</div>
                     <div className={styles.reaction}>
