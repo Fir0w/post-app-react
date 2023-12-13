@@ -1,8 +1,7 @@
-.Navbar {
+.navbar {
     display: flex;
-    width: 100vw;
     justify-content: space-between;
-    background-color: #573d3d36;
+    background-color: rgba(87, 61, 61, 1);
     border-radius: 50px;
 }
 
@@ -28,11 +27,13 @@ header {
 }
 
 .visible {
+    width: 100%;
     top: 0;
     transition: top 0.4s ease-out;
 }
 
 .hidden {
+    width: 100%;
     top: -100px;
     transition: top 0.4s ease-out;
 }
