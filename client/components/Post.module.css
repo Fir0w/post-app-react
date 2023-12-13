@@ -1,0 +1,41 @@
+.postContainer {
+    display: flex;
+    width: 500px;
+    min-height: 100px;
+    height: 100%;
+    background-color: rgba(59, 59, 59, 0.85);
+    border-radius: 10px;
+    margin: 20px auto 0 auto;
+}
+
+.post {
+    display: flex;
+    justify-content: start;
+    margin: 10px 0 0 10px;
+}
+
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 0 0;
+    align-items: start;
+}
+
+.profileName {
+    display: flex;
+}
+
+.postContent {
+    text-align: start;
+    margin: 0 10px 0 0;
+    font-size: 18px;
+}
+
+.reaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px 0 0;
+    height: 50px;
+    font-size: 14px;
+}

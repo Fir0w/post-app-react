@@ -1,23 +1,21 @@
 .postContainer {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 500px;
     background-color: rgba(59, 59, 59, 0.85);
     margin: 0 auto;
-    position: relative;
     border-radius: 15px;
 }
 
 .PostForm {
     display: flex;
     margin: 10px 0 0 10px;
-    position: relative;
 }
 
 .formBox {
     display: flex;
     overflow: hidden;
-    width: 300px;
+    width: 400px;
     margin: 13px 0 0 15px;
 }
 
@@ -25,8 +23,7 @@
     font-size: 18px;
     white-space: pre-wrap;
     text-align: start;
-    max-width: 300px;
-    min-width: 300px;
+    min-width: 400px;
 }
 
 .span:focus-visible {

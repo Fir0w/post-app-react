@@ -5,10 +5,11 @@ import axios from 'axios';
 const PostForm = () => {
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
-    const [len, setLen] = useState(145);
+    const postLength = 145;
+    const [len, setLen] = useState(postLength);
 
     useEffect(() => {
-        setLen(145 - text.length)
+        setLen(postLength - text.length)
         if (!text.length)
             setPlaceHolder(true)
         else setPlaceHolder(false)
@@ -19,12 +20,20 @@ const PostForm = () => {
 
         const formData = { message: text }
 
-        if (len >= 0 && len !== 145) {
+        if (len >= 0 && len !== postLength) {
             try {
                 const res = await axios.post('/api/home/post', formData);
                 console.log(res);
             } catch (err) { console.log(err); }
         }
+    };
+
+    const onPaste = (e) => {
+
+        e.preventDefault();
+        let txt = (e.originalEvent || e).clipboardData.getData('text/plain');
+        txt = txt.replace(/\t/g, '').replace(/\s+/g, ' ').trim();
+        document.execCommand('insertText', false, txt);
     };
 
     let plc = placeholder ? styles.spanPlaceholderVisible : styles.spanPlaceholderNone;
@@ -34,19 +43,19 @@ const PostForm = () => {
         <div className={styles.postContainer}>
             <div className={styles.PostForm}>
                 <a href="">
-                    <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox}>
-                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} onInput={e => setText(e.target.innerText)} >
+                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
                     </span>
-                    <span className={plc} >What&#39;s on your mind?</span>
+                    <span className={plc}>What&#39;s on your mind?</span>
                 </div>
             </div>
             <div className={styles.postButton}>
                 <div className={styles.len}>{len}</div>
                 <button className={styles.button} onClick={postResponse} >Post</button>
             </div>
-        </div >
+        </div>
     );
 };
 
