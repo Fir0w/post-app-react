@@ -6,7 +6,7 @@ const PageNotFound = () => {
         <div className={styles.errorContainer}>
             <p className={styles.errorTitle}>404</p>
             <p className={styles.errorMsg}>Not Found</p>
-            <p>The resource requested could not be foundon this server!</p>
+            <p>The resource requested could not be found on this server!</p>
         </div>
     );
 };
