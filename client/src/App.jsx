@@ -3,6 +3,7 @@ import Signup from '../components/Signup';
 import Index from '../components/Index';
 import Login from '../components/Login';
 import Home from '../components/Home';
+import PageNotFound from '../components/PageNotFound';
 import './App.css'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="home" element={<Home />} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     );
 }
