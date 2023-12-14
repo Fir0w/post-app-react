@@ -1,7 +1,7 @@
 import styles from './Home.module.css';
 import Navbar from './Navbar';
 import PostForm from './PostForm';
-import Post from './Post';
+import PostsList from './PostsList';
 
 const Home = () => {
 
@@ -10,7 +10,7 @@ const Home = () => {
             <Navbar />
             <main>
                 <PostForm />
-                <Post />
+                <PostsList />
             </main>
         </>
     );

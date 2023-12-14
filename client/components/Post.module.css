@@ -2,7 +2,6 @@
     display: flex;
     width: 500px;
     min-height: 100px;
-    height: 100%;
     background-color: rgba(59, 59, 59, 0.85);
     border-radius: 10px;
     margin: 20px auto 0 auto;
