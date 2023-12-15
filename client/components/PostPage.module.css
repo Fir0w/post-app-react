@@ -1,11 +1,37 @@
 .postContainer {
     display: flex;
+    flex-direction: column;
     width: 500px;
     min-height: 100px;
     background-color: rgba(59, 59, 59, 0.85);
     border-radius: 10px;
     margin: 20px auto 0 auto;
-    cursor: pointer;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    padding: unset;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.button:focus,
+.button:focus-visible {
+    outline: none;
 }
 
 .post {
