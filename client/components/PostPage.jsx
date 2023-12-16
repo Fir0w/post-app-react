@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import styles from './PostPage.module.css';
+import leftArrow from '../src/assets/leftArrow.svg'
+
 
 const PostPage = ({ profileImg, profileName, postContent, upVote, downVote, comment, timeStamp }) => {
 
@@ -14,20 +17,19 @@ const PostPage = ({ profileImg, profileName, postContent, upVote, downVote, comm
         timeStamp: "18:44 11/12/2023",
     };
 
+    const navigate = useNavigate();
+
+
     return (
         <>
             <Navbar />
             <div style={{ padding: "100px 0 0 0" }}>
                 <div className={styles.postContainer}>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.button} onClick={() => history.back()}>
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" fill="#FFFFFF" version="1.1" id="Capa_1" width="20px" height="20px" viewBox="0 0 199.404 199.404" xmlSpace="preserve">
-                                <g>
-                                    <polygon points="199.404,81.529 74.742,81.529 127.987,28.285 99.701,0 0,99.702 99.701,199.404 127.987,171.119 74.742,117.876    199.404,117.876  " />
-                                </g>
-                            </svg>
+                        <button className={styles.button} onClick={() => navigate("/home")}>
+                            <img src={leftArrow} alt="leftArrow" />
                         </button>
-                        Post
+                        <span>Post</span>
                     </div>
                     <div className={styles.post}>
                         <div className={styles.profileContainer}>
