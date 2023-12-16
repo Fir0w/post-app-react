@@ -1,5 +1,5 @@
 import styles from './PostForm.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const PostForm = () => {
@@ -7,6 +7,7 @@ const PostForm = () => {
     const [placeholder, setPlaceHolder] = useState(true);
     const postLength = 145;
     const [len, setLen] = useState(postLength);
+    const inpt = useRef(null);
 
     useEffect(() => {
         setLen(postLength - text.length)
@@ -32,8 +33,17 @@ const PostForm = () => {
 
         e.preventDefault();
         let txt = (e.originalEvent || e).clipboardData.getData('text/plain');
-        txt = txt.replace(/\t/g, '').replace(/\s+/g, ' ').trim();
-        document.execCommand('insertText', false, txt);
+        txt = txt.replace(/\r/g, '').replace(/\s+/g, ' ').trim();
+
+        inpt.current.textContent = txt;
+
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+
+        range.setStartAfter(inpt.current.lastChild);
+
+        setPlaceHolder(false);
+        setLen(postLength - txt.length);
     };
 
     let plc = placeholder ? styles.spanPlaceholderVisible : styles.spanPlaceholderNone;
@@ -45,8 +55,8 @@ const PostForm = () => {
                 <a href="">
                     <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
-                <div className={styles.formBox}>
-                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
+                <div className={styles.formBox} spellCheck={true}>
+                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
                     </span>
                     <span className={plc}>What&#39;s on your mind?</span>
                 </div>

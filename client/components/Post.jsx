@@ -1,5 +1,6 @@
 import styles from './Post.module.css';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { useNavigate } from 'react-router-dom';
 
 const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment, timeStamp }) => {
 
@@ -13,8 +14,10 @@ const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment,
         timeStamp: PropTypes.string,
     };
 
+    const navigate = useNavigate();
+
     return (
-        <div className={styles.postContainer}>
+        <div className={styles.postContainer} onClick={() => navigate("/postpage")}>
             <div className={styles.post}>
                 <div className={styles.profileContainer}>
                     <a href="">
@@ -34,7 +37,6 @@ const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment,
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

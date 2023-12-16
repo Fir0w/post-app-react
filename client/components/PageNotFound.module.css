@@ -1,0 +1,19 @@
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.errorTitle {
+    all: unset;
+    font-size: 96px;
+    font-weight: bolder;
+}
+
+.errorMsg {
+    all: unset;
+    font-size: 24px;
+    font-weight: bold;
+}
