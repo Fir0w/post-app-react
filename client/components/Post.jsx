@@ -17,7 +17,9 @@ const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment,
     const navigate = useNavigate();
 
     return (
-        <div className={styles.postContainer} onClick={() => navigate("/postpage")}>
+        <div className={styles.postContainer} onClick={() => {
+            document.getSelection().toString().length > 0 ? '' : navigate("/postpage")
+        }}>
             <div className={styles.post}>
                 <div className={styles.profileContainer}>
                     <a href="">
@@ -37,7 +39,7 @@ const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment,
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

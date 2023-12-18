@@ -19,12 +19,12 @@ const PostForm = () => {
 
     const postResponse = async () => {
 
-        const formData = { message: text }
+        const formData = { message: text, profileName: 'beenty' }
 
         if (len >= 0 && len !== postLength) {
             try {
-                const res = await axios.post('/api/home/post', formData);
-                console.log(res);
+                const res = await axios.post('/api/posts', formData);
+                console.log(res.data);
             } catch (err) { console.log(err); }
         }
     };
@@ -63,7 +63,7 @@ const PostForm = () => {
             </div>
             <div className={styles.postButton}>
                 <div className={styles.len}>{len}</div>
-                <button className={styles.button} onClick={postResponse} >Post</button>
+                <button className={styles.button} onClick={postResponse}>Post</button>
             </div>
         </div>
     );
