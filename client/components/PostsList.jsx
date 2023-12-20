@@ -6,17 +6,6 @@ const PostsList = () => {
 
     const [postContent, setPostContent] = useState([]);
 
-    // const data = {
-    //     profileImg: "https://cdn-icons-png.flaticon.com/512/3899/3899618.png",
-    //     profileName: "Profile Name",
-    //     postContent: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque quia impedit, voluptas distinctio fuga soluta doloremque non tenetur debitis illo ex molestias aliquid, in cum culpa repudiandae blanditiis dignissimos neque? Maiores libero ratione quia porro inventore repudiandae sint culpa similique!",
-    //     upVote: "Up Vote",
-    //     downVote: "Down Vote",
-    //     comment: "Comment",
-    //     timeStamp: "18:44 11/12/2023",
-    //     id: "1"
-    // };
-
 
     useEffect(() => {
         getAllPosts()
