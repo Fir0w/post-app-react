@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import Post from './Post';
 
-const PostsList = () => {
+
+const PostsList = ({ reloadPosts }) => {
 
     const [postContent, setPostContent] = useState([]);
 
-
     useEffect(() => {
         getAllPosts()
-    }, []);
+    }, [reloadPosts]);
 
     const getAllPosts = async () => {
 
@@ -27,5 +27,6 @@ const PostsList = () => {
         }).reverse()
     );
 };
+
 
 export default PostsList;

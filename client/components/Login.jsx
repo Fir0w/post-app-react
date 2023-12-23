@@ -1,13 +1,18 @@
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
+import useAuth from './useAuthContext';
+import { validateEmail, validatePassword } from '../src/utils/validateInput';
+
 
 const Login = () => {
 
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
     const [invalid, setInvalid] = useState(false);
+
+    const { dispatch } = useAuth();
 
     const navigate = useNavigate();
 
@@ -19,27 +24,19 @@ const Login = () => {
 
     const postResponse = async () => {
 
-        const formData = { email: inputEmail, password: inputPassword }
+        const formData = { email: inputEmail, password: inputPassword };
 
         if (validateEmail(inputEmail) && validatePassword(inputPassword)) {
             try {
-                const res = await axios.post('/api/login', formData);
-                console.log(res);
-                navigate("/");
-            } catch (err) { console.log(err); }
+                const res = await axios.post('/api/users/auth', formData);
+                dispatch({ type: 'LOGIN', payload: res.data });
+                localStorage.setItem('user', JSON.stringify(res.data))
+                navigate("/home");
+            } catch (err) {
+                console.log(err);
+                setInvalid(true);
+            }
         } else setInvalid(true);
-    };
-
-    const validateEmail = (email) => {
-
-        const regex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-        return regex.test(email);
-    };
-
-    const validatePassword = (password) => {
-
-        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
-        return regex.test(password);
     };
 
 
@@ -71,5 +68,6 @@ const Login = () => {
         </div>
     );
 };
+
 
 export default Login;

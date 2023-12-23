@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { validateEmail, validatePassword, validateUsername } from '../src/utils/validateInput';
 import axios from 'axios';
 import styles from './Signup.module.css';
+
 
 const Signup = () => {
 
@@ -22,33 +24,16 @@ const Signup = () => {
 
     const postResponse = async () => {
 
-        const formData = { userName: inputUserName, email: inputEmail, password: inputPassword }
+        const formData = { username: inputUserName, email: inputEmail, password: inputPassword };
 
         if (validateEmail(inputEmail) && validatePassword(inputPassword) && validateUsername(inputUserName)) {
             try {
-                const res = await axios.post('/api/signup', formData);
-                console.log(res);
-                navigate("/");
-            } catch (err) { console.log(err); }
+                await axios.post('/api/users', formData);
+                navigate("/login");
+            } catch (err) {
+                console.log(err);
+            }
         }
-    };
-
-    const validateEmail = (email) => {
-
-        const regex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-        return regex.test(email);
-    };
-
-    const validatePassword = (password) => {
-
-        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$/;
-        return regex.test(password);
-    };
-
-    const validateUsername = (username) => {
-
-        const regex = /^[a-zA-Z0-9_]{3,10}$/;
-        return regex.test(username);
     };
 
 
@@ -82,7 +67,8 @@ const Signup = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 };
+
 
 export default Signup;

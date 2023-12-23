@@ -1,36 +1,28 @@
+/* eslint-disable react/prop-types */
 import styles from './Post.module.css';
-import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
+
 
 const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment, timeStamp }) => {
 
-    Post.propTypes = {
-        profileImg: PropTypes.string,
-        profileName: PropTypes.string,
-        postContent: PropTypes.string,
-        upVote: PropTypes.string,
-        downVote: PropTypes.string,
-        comment: PropTypes.string,
-        timeStamp: PropTypes.string,
-    };
-
     const navigate = useNavigate();
 
+
     return (
-        <div className={styles.postContainer} onClick={() => {
-            document.getSelection().toString().length > 0 ? '' : navigate("/postpage")
-        }}>
+        <div className={styles.postContainer}>
             <div className={styles.post}>
                 <div className={styles.profileContainer}>
-                    <a href="">
+                    <a href="/profile">
                         <img src={profileImg} width={50} alt="flaticon.com" />
                     </a>
                 </div>
                 <div>
-                    <a className={styles.profileName} href="">
+                    <a className={styles.profileName} href="/profile">
                         <div>{profileName}</div>
                     </a>
-                    <div className={styles.postContent}>{postContent}</div>
+                    <div className={styles.postContent} onClick={() => {
+                        document.getSelection().toString().length > 0 ? '' : navigate("/postpage")
+                    }}>{postContent}</div>
                     <div className={styles.reaction}>
                         <div>{upVote}</div>
                         <div>{downVote}</div>
@@ -42,5 +34,6 @@ const Post = ({ profileImg, profileName, postContent, upVote, downVote, comment,
         </div >
     );
 };
+
 
 export default Post;
