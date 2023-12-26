@@ -48,7 +48,7 @@ const Navbar = () => {
                     <h2>Post React App</h2>
                 </a>
                 <div className={styles.profile}>
-                    <a className={styles.profile} href="/profile">
+                    <a className={styles.profile} href={`/profile/${user.username}`}>
                         <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                         <p>{user?.username}</p>
                     </a>

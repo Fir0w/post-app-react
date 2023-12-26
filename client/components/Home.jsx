@@ -1,21 +1,35 @@
-import { useState } from 'react';
-import styles from './Home.module.css';
+import { useEffect, useState } from 'react';
+import './Home.module.css';
 import Navbar from './Navbar';
 import PostForm from './PostForm';
 import PostsList from './PostsList';
+import axios from 'axios';
 
 
 const Home = () => {
 
-    const [reloadPosts, setReloadPosts] = useState(false);
+    const [postContent, setPostContent] = useState([]);
+    const [postFormContent, setPostFormContent] = useState(false);
+
+    useEffect(() => {
+        getAllPosts()
+    }, [postFormContent]);
+
+    const getAllPosts = async () => {
+
+        try {
+            const req = await axios.get('/api/posts');
+            setPostContent(req.data);
+        } catch (err) { console.log(err); }
+    };
 
 
     return (
         <>
             <Navbar />
             <main>
-                <PostForm reloadPosts={reloadPosts} setReloadPosts={setReloadPosts} />
-                <PostsList reloadPosts={reloadPosts} />
+                <PostForm setPostFormContent={setPostFormContent} />
+                <PostsList setPostFormContent={setPostFormContent} postContent={postContent} />
             </main>
         </>
     );

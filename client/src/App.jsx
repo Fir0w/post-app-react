@@ -5,9 +5,9 @@ import Login from '../components/Login';
 import Home from '../components/Home';
 import PageNotFound from '../components/PageNotFound';
 import PostPage from '../components/PostPage';
-// import PrivateRoutes from '../utils/PrivateRoutes';
+import Profile from '../components/Profile';
 import useAuthContext from '../components/useAuthContext';
-import './App.css'
+import './App.css';
 
 
 function App() {
@@ -17,13 +17,12 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={user ? <Navigate to="/home" replace /> : <Index />} />
+            <Route path="/" element={!user ? <Index /> : <Navigate to="/home" replace />} />
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" replace />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" replace />} />
-            {/* <Route element={<PrivateRoutes />}> */}
             <Route path="/home" element={user ? <Home /> : <Navigate to="/" replace />} />
-            <Route path="/postpage" element={user ? <PostPage /> : <Navigate to="/" replace />} />
-            {/* </Route> */}
+            <Route path="/post/:postId" element={user ? <PostPage /> : <Navigate to="/" replace />} />
+            <Route path="/profile/*" element={<Profile />} />
             <Route path="*" element={<PageNotFound />} />
         </Routes>
     );

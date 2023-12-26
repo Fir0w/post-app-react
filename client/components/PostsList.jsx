@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios'
 import Post from './Post';
 
 
-const PostsList = ({ reloadPosts }) => {
-
-    const [postContent, setPostContent] = useState([]);
-
-    useEffect(() => {
-        getAllPosts()
-    }, [reloadPosts]);
-
-    const getAllPosts = async () => {
-
-        try {
-            const req = await axios.get('/api/posts');
-            setPostContent(req.data);
-        } catch (err) { console.log(err); }
-    }
+const PostsList = ({ setPostFormContent, postContent }) => {
 
 
     return (
 
+
         postContent.map((post) => {
-            return <Post key={post._id} profileImg={"https://cdn-icons-png.flaticon.com/512/3899/3899618.png"} profileName={post.profileName} postContent={post.postContent} /*upVote={post.upVote}*/ /*downVote={post.downVote}*/ /*comment={post.comment}*/ timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
+            return <Post key={post._id} setPostFormContent={setPostFormContent} userId={post.userId} postId={post._id} profileName={post.profileName} postContent={post.postContent} upVote={'up vote'} downVote={'down vote'} comment={'comment'} timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
         }).reverse()
     );
 };
