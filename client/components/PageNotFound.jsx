@@ -1,6 +1,8 @@
 import styles from './PageNotFound.module.css'
 
+
 const PageNotFound = () => {
+
 
     return (
         <div className={styles.errorContainer}>
@@ -10,5 +12,6 @@ const PageNotFound = () => {
         </div>
     );
 };
+
 
 export default PageNotFound;

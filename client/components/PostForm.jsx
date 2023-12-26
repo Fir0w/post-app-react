@@ -1,30 +1,45 @@
+/* eslint-disable react/prop-types */
 import styles from './PostForm.module.css';
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import useAuth from './useAuthContext';
 
-const PostForm = () => {
+
+const PostForm = ({ setReloadPosts }) => {
+
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
     const postLength = 145;
     const [len, setLen] = useState(postLength);
     const inpt = useRef(null);
 
+    const { user } = useAuth();
+
+    const navigate = useNavigate();
+
     useEffect(() => {
-        setLen(postLength - text.length)
-        if (!text.length)
-            setPlaceHolder(true)
-        else setPlaceHolder(false)
+        setLen(postLength - text.length);
+        if (!text.length) {
+            setPlaceHolder(true);
+        } else setPlaceHolder(false);
     }, [text.length]);
 
 
     const postResponse = async () => {
 
-        const formData = { message: text, profileName: 'beenty' }
+        setReloadPosts(false);
+
+        const formData = { message: text, profileName: user.username, userId: user.userId }
 
         if (len >= 0 && len !== postLength) {
             try {
-                const res = await axios.post('/api/posts', formData);
-                console.log(res.data);
+                await axios.post('/api/posts', formData);
+                navigate("/home");
+                document.getElementById('text').innerText = '';
+                setText('');
+                setReloadPosts(true);
+                setPlaceHolder(true);
             } catch (err) { console.log(err); }
         }
     };
@@ -44,6 +59,7 @@ const PostForm = () => {
 
         setPlaceHolder(false);
         setLen(postLength - txt.length);
+        setText(txt);
     };
 
     let plc = placeholder ? styles.spanPlaceholderVisible : styles.spanPlaceholderNone;
@@ -56,7 +72,7 @@ const PostForm = () => {
                     <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox} spellCheck={true}>
-                    <span suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
+                    <span id='text' suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
                     </span>
                     <span className={plc}>What&#39;s on your mind?</span>
                 </div>
@@ -68,5 +84,6 @@ const PostForm = () => {
         </div>
     );
 };
+
 
 export default PostForm;

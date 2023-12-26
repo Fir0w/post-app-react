@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 
 
@@ -19,5 +19,6 @@ const Index = () => {
         </div>
     );
 };
+
 
 export default Index;
