@@ -1,7 +1,7 @@
 import Post from '../models/postModel.js';
 
 
-const post = async (req, res) => {
+const createPost = async (req, res) => {
 
     const { message } = req.body;
 
@@ -21,7 +21,7 @@ const post = async (req, res) => {
     };
 };
 
-const get = async (req, res) => {
+const getPost = async (req, res) => {
 
     try {
         const posts = await Post.find(req.query.postId ? { '_id': req.query.postId } : {});
@@ -32,7 +32,7 @@ const get = async (req, res) => {
     };
 };
 
-const Delete = async (req, res) => {
+const deletePost = async (req, res) => {
 
     if (req.query.userId !== req.user._id.toString())
         return res.status(500).send({ message: "something went wrong" });
@@ -48,4 +48,4 @@ const Delete = async (req, res) => {
 };
 
 
-export { post, get, Delete };
+export { createPost, getPost, deletePost };

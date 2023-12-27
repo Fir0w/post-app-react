@@ -121,3 +121,10 @@
     background-color: #424242;
     border-radius: 5px;
 }
+
+.notexist {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

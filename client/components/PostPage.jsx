@@ -33,8 +33,11 @@ const PostPage = () => {
         try {
             const req = await axios.get(`/api/posts/?postId=${postId}`);
             setPostContent(req.data);
-        } catch (err) { console.log(err); }
+        } catch (err) {
+            console.log(err);
+        }
     };
+
 
     const deletePost = async () => {
 
@@ -50,7 +53,7 @@ const PostPage = () => {
     return (
         <>
             <Navbar />
-            <div style={{ padding: "100px 0 0 0" }}>
+            {postContent ? <div style={{ padding: "100px 0 0 0" }}>
                 <div className={styles.postContainer}>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} onClick={() => navigate("/home")}>
@@ -87,7 +90,7 @@ const PostPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> : <div className={styles.notexist}>Sorry Post does not exist!</div>}
         </>
     );
 };
