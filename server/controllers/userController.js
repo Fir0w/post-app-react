@@ -17,8 +17,7 @@ const authUser = async (req, res) => {
         res.status(202).json({
             message: "User Authenticated",
             userId: user._id,
-            username: user.username,
-            email: user.email
+            username: user.username
         });
     } else
         res.status(401).send({ message: "Invalid email or password" });

@@ -1,23 +1,17 @@
 import Post from '../models/postModel.js';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
 
 
-const post = async (req, res) => {
+const createPost = async (req, res) => {
 
-    // WORK IN PROGRESS
-    // const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
-    // console.log(await User.findById(decoded.userId));
+    const { message } = req.body;
 
-    const { message, profileName, userId } = req.body;
-
-    if (!message || !profileName)
+    if (!message)
         return res.status(400).send({ message: "empty input field" });
 
     try {
         await Post.create({
-            userId,
-            profileName,
+            userId: req.user._id,
+            profileName: req.user.username,
             postContent: message
         });
         res.status(200).send({ message: "Message has been posted" });
@@ -27,11 +21,25 @@ const post = async (req, res) => {
     };
 };
 
-const get = async (req, res) => {
+const getPost = async (req, res) => {
 
     try {
-        const posts = await Post.find({});
+        const posts = await Post.find(req.query.postId ? { '_id': req.query.postId } : {});
         res.status(200).send(posts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    };
+};
+
+const deletePost = async (req, res) => {
+
+    if (req.query.userId !== req.user._id.toString())
+        return res.status(500).send({ message: "something went wrong" });
+
+    try {
+        await Post.deleteOne({ '_id': req.query.postId });
+        res.status(200).send({ message: "Post was deleted" });
 
     } catch (error) {
         console.error(error);
@@ -39,4 +47,5 @@ const get = async (req, res) => {
     };
 };
 
-export { post, get };
+
+export { createPost, getPost, deletePost };

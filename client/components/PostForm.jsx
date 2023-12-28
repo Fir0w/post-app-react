@@ -6,7 +6,7 @@ import axios from 'axios';
 import useAuth from './useAuthContext';
 
 
-const PostForm = ({ setReloadPosts }) => {
+const PostForm = ({ setPostFormContent }) => {
 
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
@@ -28,9 +28,9 @@ const PostForm = ({ setReloadPosts }) => {
 
     const postResponse = async () => {
 
-        setReloadPosts(false);
+        setPostFormContent(false);
 
-        const formData = { message: text, profileName: user.username, userId: user.userId }
+        const formData = { message: text };
 
         if (len >= 0 && len !== postLength) {
             try {
@@ -38,7 +38,7 @@ const PostForm = ({ setReloadPosts }) => {
                 navigate("/home");
                 document.getElementById('text').innerText = '';
                 setText('');
-                setReloadPosts(true);
+                setPostFormContent(true);
                 setPlaceHolder(true);
             } catch (err) { console.log(err); }
         }
@@ -68,7 +68,7 @@ const PostForm = ({ setReloadPosts }) => {
     return (
         <div className={styles.postContainer}>
             <div className={styles.PostForm}>
-                <a href="">
+                <a href={`/profile/${user?.username}`}>
                     <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox} spellCheck={true}>

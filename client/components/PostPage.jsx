@@ -1,29 +1,59 @@
-import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from './Navbar';
 import styles from './PostPage.module.css';
-import leftArrow from '../src/assets/leftArrow.svg'
+import leftArrow from '../src/assets/leftArrow.svg';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import useAuth from './useAuthContext';
 
 
-const PostPage = ({ profileImg, profileName, postContent, upVote, downVote, comment, timeStamp }) => {
+
+const PostPage = () => {
 
 
     const data = {
-        profileImg: "https://cdn-icons-png.flaticon.com/512/3899/3899618.png",
-        profileName: "Profile Name",
-        postContent: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque quia impedit, voluptas distinctio fuga soluta doloremque non tenetur debitis illo ex molestias aliquid, in cum culpa repudiandae blanditiis dignissimos neque? Maiores libero ratione quia porro inventore repudiandae sint culpa similique!",
         upVote: "Up Vote",
         downVote: "Down Vote",
-        comment: "Comment",
-        timeStamp: "18:44 11/12/2023",
     };
 
+    const [postContent, setPostContent] = useState('');
+
     const navigate = useNavigate();
+    const { postId } = useParams();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        getPost();
+    }, []);
+
+
+    const getPost = async () => {
+
+        try {
+            const req = await axios.get(`/api/posts/?postId=${postId}`);
+            setPostContent(req.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+    const deletePost = async () => {
+
+        try {
+            await axios.delete(`/api/posts/?postId=${postId}&userId=${user.userId}`);
+            navigate('/home');
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
 
     return (
         <>
             <Navbar />
-            <div style={{ padding: "100px 0 0 0" }}>
+            {postContent ? <div style={{ padding: "100px 0 0 0" }}>
                 <div className={styles.postContainer}>
                     <div className={styles.buttonContainer}>
                         <button className={styles.button} onClick={() => navigate("/home")}>
@@ -33,26 +63,37 @@ const PostPage = ({ profileImg, profileName, postContent, upVote, downVote, comm
                     </div>
                     <div className={styles.post}>
                         <div className={styles.profileContainer}>
-                            <a href="">
-                                <img src={data.profileImg} width={50} alt="flaticon.com" />
+                            <a href={`/profile/${postContent[0]?.profileName}`}>
+                                <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
                             </a>
                         </div>
                         <div>
-                            <a className={styles.profileName} href="">
-                                <div>{data.profileName}</div>
-                            </a>
-                            <div className={styles.postContent}>{data.postContent}</div>
+                            <div className={styles.header}>
+                                <a className={styles.profileName} href={`/profile/${postContent[0]?.profileName}`}>
+                                    <div>{postContent[0]?.profileName}</div>
+                                </a>
+                                <div className={styles.dropdownContainer} tabIndex="-1">
+                                    <div className={styles.threeDots}>
+                                        <div className={styles.dropdown}>
+                                            {postContent[0]?.userId === user.userId && <p className={styles.option} onClick={deletePost}>Delete</p>}
+                                            <p className={styles.option}>Report</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.postContent}>{postContent[0]?.postContent}</div>
                             <div className={styles.reaction}>
                                 <div>{data.upVote}</div>
                                 <div>{data.downVote}</div>
-                                <div className={styles.timeStamp}>{data.timeStamp}</div>
+                                <div className={styles.timeStamp}>{new Date(postContent[0]?.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> : <div className={styles.notexist}>Sorry Post does not exist!</div>}
         </>
     );
 };
+
 
 export default PostPage;
