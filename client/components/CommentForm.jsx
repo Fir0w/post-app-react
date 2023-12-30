@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import styles from './PostForm.module.css';
+import styles from './CommentForm.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useAuth from './useAuthContext';
+import { useParams } from 'react-router-dom';
 
 
-const PostForm = ({ setPostFormContent }) => {
+const PostForm = ({ setCommentUpdate }) => {
 
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
@@ -14,6 +15,7 @@ const PostForm = ({ setPostFormContent }) => {
     const inpt = useRef(null);
 
     const { user } = useAuth();
+    const { postId } = useParams();
 
     useEffect(() => {
         setLen(postLength - text.length);
@@ -25,17 +27,17 @@ const PostForm = ({ setPostFormContent }) => {
 
     const postResponse = async () => {
 
-        setPostFormContent(false);
+        setCommentUpdate(false);
 
         const formData = { message: text };
 
         if (len >= 0 && len !== postLength) {
             try {
-                await axios.post('/api/posts', formData);
+                await axios.post(`/api/comments/?postId=${postId}`, formData);
                 document.getElementById('text').innerText = '';
                 setText('');
-                setPostFormContent(true);
                 setPlaceHolder(true);
+                setCommentUpdate(true);
             } catch (err) { console.log(err); }
         }
     };
@@ -70,7 +72,7 @@ const PostForm = ({ setPostFormContent }) => {
                 <div className={styles.formBox} spellCheck={true}>
                     <span id='text' suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
                     </span>
-                    <span className={plc}>What&#39;s on your mind?</span>
+                    <span className={plc}>Post your reply</span>
                 </div>
             </div>
             <div className={styles.postButton}>

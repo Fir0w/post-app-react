@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import styles from './PostPage.module.css';
@@ -6,18 +5,20 @@ import leftArrow from '../src/assets/leftArrow.svg';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import useAuth from './useAuthContext';
-
+import CommentForm from './CommentForm';
+import CommentsList from './CommentsList';
 
 
 const PostPage = () => {
-
 
     const data = {
         upVote: "Up Vote",
         downVote: "Down Vote",
     };
 
-    const [postContent, setPostContent] = useState('');
+    const [postContent, setPostContent] = useState([]);
+    const [comment, setComment] = useState([]);
+    const [commentUpdate, setCommentUpdate] = useState(false);
 
     const navigate = useNavigate();
     const { postId } = useParams();
@@ -25,19 +26,20 @@ const PostPage = () => {
 
     useEffect(() => {
         getPost();
-    }, []);
-
+        getAllComments();
+    }, [commentUpdate]);
 
     const getPost = async () => {
 
         try {
             const req = await axios.get(`/api/posts/?postId=${postId}`);
+            if (!req.data[0])
+                return setPostContent('');
             setPostContent(req.data);
         } catch (err) {
             console.log(err);
         }
     };
-
 
     const deletePost = async () => {
 
@@ -47,6 +49,14 @@ const PostPage = () => {
         } catch (error) {
             console.log(error)
         }
+    };
+
+    const getAllComments = async () => {
+
+        try {
+            const req = await axios.get(`/api/comments/?postId=${postId}`);
+            setComment(req.data);
+        } catch (err) { console.log(err); }
     };
 
 
@@ -91,6 +101,8 @@ const PostPage = () => {
                     </div>
                 </div>
             </div> : <div className={styles.notexist}>Sorry Post does not exist!</div>}
+            <CommentForm setCommentUpdate={setCommentUpdate} />
+            <CommentsList setCommentUpdate={setCommentUpdate} comment={comment} postUserId={postContent[0]?.userId} />
         </>
     );
 };

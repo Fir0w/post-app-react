@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
+    postId: {
+        type: String,
+        required: true
+    },
     userId: {
         type: String,
         required: true
@@ -12,11 +16,7 @@ const postSchema = mongoose.Schema({
     postContent: {
         type: String,
         required: true
-    },
-    commentsCount: {
-        type: Number,
-        default: 0,
     }
 }, { timestamps: true });
 
-export default mongoose.model('Post', postSchema);
+export default mongoose.model('Comment', postSchema);
