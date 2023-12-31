@@ -7,3 +7,9 @@ main {
     width: 100%;
     margin: 0 auto;
 }
+
+.attribute {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+}

@@ -69,7 +69,7 @@ const PostForm = ({ setPostFormContent }) => {
         <div className={styles.postContainer}>
             <div className={styles.PostForm}>
                 <a href={`/profile/${user?.username}`}>
-                    <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                    <img src={`/profileAvatar/avatar${user.profileAvatar}.png`} width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox} spellCheck={true}>
                     <span id='text' suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >

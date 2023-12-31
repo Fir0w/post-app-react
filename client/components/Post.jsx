@@ -29,7 +29,7 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, up
             <div className={styles.post}>
                 <div className={styles.profileContainer}>
                     <a href={`/profile/${profileName}`}>
-                        <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                        <img src="/profileAvatar/avatar1.png" width={50} alt="flaticon.com" />
                     </a>
                 </div>
                 <div>
