@@ -12,7 +12,7 @@ const Home = () => {
     const [postFormContent, setPostFormContent] = useState(false);
 
     useEffect(() => {
-        getAllPosts()
+        getAllPosts();
     }, [postFormContent]);
 
     const getAllPosts = async () => {

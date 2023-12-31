@@ -1,4 +1,5 @@
 import Post from '../models/postModel.js';
+import Comment from '../models/commentModel.js';
 
 
 const createPost = async (req, res) => {
@@ -39,6 +40,7 @@ const deletePost = async (req, res) => {
 
     try {
         await Post.deleteOne({ '_id': req.query.postId });
+        await Comment.deleteMany({ 'postId': req.query.postId });
         res.status(200).send({ message: "Post was deleted" });
 
     } catch (error) {
