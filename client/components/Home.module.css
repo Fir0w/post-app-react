@@ -9,7 +9,8 @@ main {
 }
 
 .attribute {
-    position: absolute;
-    z-index: -1;
+    font-size: 12px;
+    position: fixed;
     left: 0;
+    bottom: 0;
 }

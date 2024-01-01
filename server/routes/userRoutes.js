@@ -9,7 +9,7 @@ router.post('/', registerUser);
 router.post('/auth', authUser);
 router.post('/logout', logoutUser);
 router.put('/updateAvatar', protect, updateAvatar);
-router.post('/user', getUser);
+router.get('/user', getUser);
 
 
 

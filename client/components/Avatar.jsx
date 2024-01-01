@@ -8,7 +8,7 @@ const Avatar = () => {
 
     const setAvatar = async (index) => {
         try {
-            const res = await axios.put('/api/users/updateAvatar', { index: index });
+            const res = await axios.put('/api/users/updateAvatar', { index });
             let user = JSON.parse(localStorage.getItem('user'));
             user = {
                 ...user,

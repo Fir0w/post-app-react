@@ -18,7 +18,7 @@ const Profile = () => {
     const getProfile = async () => {
 
         try {
-            const res = await axios.post('/api/users/user', { username: location.pathname.substring(location.pathname.lastIndexOf('/') + 1) });
+            const res = await axios.get(`/api/users/user?username=${location.pathname.substring(location.pathname.lastIndexOf('/') + 1)}`);
             setProfile(res.data);
         } catch (error) {
             console.log(error)

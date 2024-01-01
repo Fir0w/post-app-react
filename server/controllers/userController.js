@@ -88,7 +88,7 @@ const updateAvatar = async (req, res) => {
 // @accesss Public
 const getUser = async (req, res) => {
 
-    const { username } = req.body;
+    const { username } = req.query;
     try {
         const user = await User.findOne({ "username": username });
         res.status(202).json({

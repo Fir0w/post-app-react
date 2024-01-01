@@ -44,7 +44,7 @@ const Navbar = () => {
         <header className={cls}>
             <div className={styles.navbar}>
                 <a className={styles.home} href="/home">
-                    <img src="/logo.png" width={70} style={{ padding: "10px" }} alt="Post react logo" />
+                    <img className={styles.logo} src="/logo.png" alt="Post react logo" />
                     <h2>Post React App</h2>
                 </a>
                 <div className={styles.profile}>
