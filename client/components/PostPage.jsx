@@ -19,6 +19,7 @@ const PostPage = () => {
     const [postContent, setPostContent] = useState([]);
     const [comment, setComment] = useState([]);
     const [commentUpdate, setCommentUpdate] = useState(false);
+    const [profile, setProfile] = useState([]);
 
     const navigate = useNavigate();
     const { postId } = useParams();
@@ -35,6 +36,8 @@ const PostPage = () => {
             const req = await axios.get(`/api/posts/?postId=${postId}`);
             if (!req.data[0])
                 return setPostContent('');
+            const res = await axios.get(`/api/users/user?username=${req.data[0].profileName}`);
+            setProfile(res.data);
             setPostContent(req.data);
         } catch (err) {
             console.log(err);
@@ -74,7 +77,7 @@ const PostPage = () => {
                     <div className={styles.post}>
                         <div className={styles.profileContainer}>
                             <a href={`/profile/${postContent[0]?.profileName}`}>
-                                <img src="/profileAvatar/avatar1.png" width={50} alt="flaticon.com" />
+                                <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
                             </a>
                         </div>
                         <div>

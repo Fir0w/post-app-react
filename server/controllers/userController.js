@@ -92,7 +92,7 @@ const getUser = async (req, res) => {
     try {
         const user = await User.findOne({ "username": username });
         res.status(202).json({
-            profileAvatar: user.profileAvatar,
+            profileAvatar: user?.profileAvatar,
             username
         });
 

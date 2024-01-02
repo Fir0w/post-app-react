@@ -11,7 +11,7 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, up
     const navigate = useNavigate();
 
     const { user } = useAuth();
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState({ profileAvatar: 1 });
 
     useEffect(() => {
         getProfile();
