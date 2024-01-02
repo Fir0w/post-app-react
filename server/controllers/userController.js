@@ -17,7 +17,8 @@ const authUser = async (req, res) => {
         res.status(202).json({
             message: "User Authenticated",
             userId: user._id,
-            username: user.username
+            username: user.username,
+            profileAvatar: user.profileAvatar
         });
     } else
         res.status(401).send({ message: "Invalid email or password" });
@@ -70,5 +71,35 @@ const logoutUser = async (req, res) => {
     res.status(200).send({ message: "User logged out" });
 };
 
+// @desc Update user avatar
+// route Put /api/users/avatar
+// @accesss Private
+const updateAvatar = async (req, res) => {
 
-export { authUser, registerUser, logoutUser };
+    const { index } = req.body;
+    const user = await User.findOneAndUpdate(req.user._id, { profileAvatar: index }, { new: true });
+    res.status(202).json({
+        profileAvatar: user.profileAvatar
+    });
+};
+
+// @desc Get user profile
+// route GET /api/users/user
+// @accesss Public
+const getUser = async (req, res) => {
+
+    const { username } = req.query;
+    try {
+        const user = await User.findOne({ "username": username });
+        res.status(202).json({
+            profileAvatar: user.profileAvatar,
+            username
+        });
+
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+
+export { authUser, registerUser, logoutUser, updateAvatar, getUser };

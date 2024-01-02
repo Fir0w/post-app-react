@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Home.module.css';
+import styles from './Home.module.css';
 import Navbar from './Navbar';
 import PostForm from './PostForm';
 import PostsList from './PostsList';
@@ -31,6 +31,7 @@ const Home = () => {
                 <PostForm setPostFormContent={setPostFormContent} />
                 <PostsList setPostFormContent={setPostFormContent} postContent={postContent} />
             </main>
+            <a className={styles.attribute} href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Flat Icons - Flaticon</a>
         </>
     );
 };

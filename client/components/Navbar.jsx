@@ -44,12 +44,12 @@ const Navbar = () => {
         <header className={cls}>
             <div className={styles.navbar}>
                 <a className={styles.home} href="/home">
-                    <img src="/logo.png" width={100} alt="Post react logo" />
+                    <img className={styles.logo} src="/logo.png" alt="Post react logo" />
                     <h2>Post React App</h2>
                 </a>
                 <div className={styles.profile}>
                     <a className={styles.profile} href={`/profile/${user.username}`}>
-                        <img className={styles.img} src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                        <img className={styles.img} src={`/profileAvatar/avatar${user.profileAvatar}.png`} width={50} alt="flaticon.com" />
                         <p>{user?.username}</p>
                     </a>
                     <button className={styles.button} onClick={logout}>Logout</button>
