@@ -3,6 +3,7 @@ import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import postRoutes from './routes/postRoutes.js';
+import voteRoues from './routes/voteRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/posts', postRoutes);
+app.use('/api/posts/vote', voteRoues);
 app.use('/api/users', userRoutes);
 app.use('/api/comments', commentRoutes);
 

@@ -1,14 +1,31 @@
-/* eslint-disable react/prop-types */
 import { useParams } from 'react-router-dom';
 import styles from './Post.module.css';
 import useAuth from './useAuthContext';
 import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 
 const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName, postContent, upVote, downVote, timeStamp }) => {
 
     const { user } = useAuth();
     const { postId } = useParams();
+    const [profile, setProfile] = useState({ profileAvatar: 1 });
+
+    const getProfile = useCallback(
+        async () => {
+
+            try {
+                const res = await axios.get(`/api/users/user?username=${profileName}`);
+                setProfile(res.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }, [profileName]);
+
+    useEffect(() => {
+        getProfile();
+    }, [getProfile]);
 
     const deleteComment = async () => {
 
@@ -28,7 +45,7 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
             <div className={styles.post}>
                 <div className={styles.profileContainer}>
                     <a href={`/profile/${profileName}`}>
-                        <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                        <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
                     </a>
                 </div>
                 <div>
@@ -55,6 +72,18 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
             </div>
         </div >
     );
+};
+
+Comment.propTypes = {
+    setCommentUpdate: PropTypes.func,
+    userId: PropTypes.string,
+    postUserId: PropTypes.string,
+    profileName: PropTypes.string,
+    postContent: PropTypes.string,
+    upVote: PropTypes.string,
+    downVote: PropTypes.string,
+    commentId: PropTypes.string,
+    timeStamp: PropTypes.string
 };
 
 

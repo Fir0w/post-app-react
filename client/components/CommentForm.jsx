@@ -1,28 +1,44 @@
-/* eslint-disable react/prop-types */
 import styles from './CommentForm.module.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import useAuth from './useAuthContext';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
-const PostForm = ({ setCommentUpdate }) => {
+const CommentForm = ({ setCommentUpdate }) => {
 
     const [text, setText] = useState('');
     const [placeholder, setPlaceHolder] = useState(true);
     const postLength = 145;
     const [len, setLen] = useState(postLength);
     const inpt = useRef(null);
+    const [profile, setProfile] = useState({ profileAvatar: 1 });
 
     const { user } = useAuth();
     const { postId } = useParams();
+
+    const getProfile = useCallback(
+        async () => {
+
+            try {
+                const res = await axios.get(`/api/users/user?username=${user.username}`);
+                setProfile(res.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }, [user.username]);
+
+    useEffect(() => {
+        getProfile();
+    }, [getProfile]);
 
     useEffect(() => {
         setLen(postLength - text.length);
         if (!text.length) {
             setPlaceHolder(true);
         } else setPlaceHolder(false);
-    }, [text.length]);
+    }, [text.length, getProfile]);
 
 
     const postResponse = async () => {
@@ -67,7 +83,7 @@ const PostForm = ({ setCommentUpdate }) => {
         <div className={styles.postContainer}>
             <div className={styles.PostForm}>
                 <a href={`/profile/${user?.username}`}>
-                    <img src="https://cdn-icons-png.flaticon.com/512/3899/3899618.png" width={50} alt="flaticon.com" />
+                    <img src={`/profileAvatar/avatar${profile?.profileAvatar}.png`} width={50} alt="flaticon.com" />
                 </a>
                 <div className={styles.formBox} spellCheck={true}>
                     <span id='text' suppressContentEditableWarning={true} className={styles.span} contentEditable={true} ref={inpt} onPaste={onPaste} onInput={e => setText(e.target.innerText)} >
@@ -83,5 +99,9 @@ const PostForm = ({ setCommentUpdate }) => {
     );
 };
 
+CommentForm.propTypes = {
+    setCommentUpdate: PropTypes.func,
+};
 
-export default PostForm;
+
+export default CommentForm;
