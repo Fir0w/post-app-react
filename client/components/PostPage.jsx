@@ -1,9 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import styles from './PostPage.module.css';
 import leftArrow from '../src/assets/leftArrow.svg';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useAuth from './useAuthContext';
 import CommentForm from './CommentForm';
 import CommentsList from './CommentsList';
@@ -19,18 +19,13 @@ const PostPage = () => {
     const [postContent, setPostContent] = useState([]);
     const [comment, setComment] = useState([]);
     const [commentUpdate, setCommentUpdate] = useState(false);
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState({ profileAvatar: 1 });
 
     const navigate = useNavigate();
     const { postId } = useParams();
     const { user } = useAuth();
 
-    useEffect(() => {
-        getPost();
-        getAllComments();
-    }, [commentUpdate]);
-
-    const getPost = async () => {
+    const getPost = useCallback(async () => {
 
         try {
             const req = await axios.get(`/api/posts/?postId=${postId}`);
@@ -42,7 +37,21 @@ const PostPage = () => {
         } catch (err) {
             console.log(err);
         }
-    };
+    }, [postId]);
+
+    const getAllComments = useCallback(async () => {
+
+        try {
+            const req = await axios.get(`/api/comments/?postId=${postId}`);
+            setComment(req.data);
+        } catch (err) { console.log(err); }
+    }, [postId]);
+
+    useEffect(() => {
+        getPost();
+        getAllComments();
+    }, [commentUpdate, getAllComments, getPost]);
+
 
     const deletePost = async () => {
 
@@ -54,14 +63,6 @@ const PostPage = () => {
         }
     };
 
-    const getAllComments = async () => {
-
-        try {
-            const req = await axios.get(`/api/comments/?postId=${postId}`);
-            setComment(req.data);
-        } catch (err) { console.log(err); }
-    };
-
 
     return (
         <>
@@ -69,9 +70,11 @@ const PostPage = () => {
             {postContent ? <div style={{ padding: "100px 0 0 0" }}>
                 <div className={styles.postContainer}>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.button} onClick={() => navigate("/home")}>
-                            <img src={leftArrow} alt="leftArrow" />
-                        </button>
+                        <Link to={'/home'}>
+                            <button className={styles.button}>
+                                <img src={leftArrow} alt="leftArrow" />
+                            </button>
+                        </Link>
                         <span>Post</span>
                     </div>
                     <div className={styles.post}>

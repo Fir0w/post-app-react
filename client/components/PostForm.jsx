@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import styles from './PostForm.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import useAuth from './useAuthContext';
+import PropTypes from 'prop-types';
 
 
 const PostForm = ({ setPostFormContent }) => {
@@ -79,6 +79,10 @@ const PostForm = ({ setPostFormContent }) => {
             </div>
         </div>
     );
+};
+
+PostForm.propTypes = {
+    setPostFormContent: PropTypes.func
 };
 
 
