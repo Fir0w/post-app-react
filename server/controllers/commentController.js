@@ -2,6 +2,12 @@ import Comment from '../models/commentModel.js';
 import Post from '../models/postModel.js';
 
 
+// @desc This API Creates a Comment in DB
+// route POST /api/comments/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns a message 
+// @returns {object} 400 - Returns an object that returns a message "empty input field"
+// @returns {object} 500 - Returns an object that returns a message "something went wrong"
 const createComment = async (req, res) => {
 
     const { message } = req.body;
@@ -27,6 +33,11 @@ const createComment = async (req, res) => {
     };
 };
 
+// @desc This API Gets all Comment from DB
+// route GET /api/comments/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns all the comments of a specific post
+// @returns {object} 500 - Returns an object that returns a message "Internal Server Error"
 const getComment = async (req, res) => {
 
     try {
@@ -35,10 +46,16 @@ const getComment = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send({ message: "Internal Server Error" });
     };
 };
 
+// @desc This API Deletes a Comment from DB
+// route DELETE /api/comments/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns a message "Post was deleted"
+// @returns {object} 500 - Returns an object that returns a message "something went wrong"
+// @returns {object} 500 - Returns an object that returns a message "Internal Server Error"
 const deleteComment = async (req, res) => {
 
     if ((req.query.postUserId && req.query.userId) !== req.user._id.toString())
@@ -56,7 +73,7 @@ const deleteComment = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send({ message: "Internal Server Error" });
     };
 };
 

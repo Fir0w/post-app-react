@@ -6,6 +6,8 @@ import generateToken from '../utils/generateToken.js';
 // @desc Auth user/set token
 // route POST /api/users/auth
 // @accesss Public
+// @returns {object} 202 - Returns an object that returns a JSON with user info
+// @returns {object} 401 - Returns an object that returns a message "Invalid email or password"
 const authUser = async (req, res) => {
 
     const { email, password } = req.body;
@@ -27,6 +29,10 @@ const authUser = async (req, res) => {
 // @desc Register new user
 // route POST /api/users
 // @accesss Public
+// @returns {object} 201 - Returns an object that returns a message "User created"
+// @returns {object} 400 - Returns an object that returns a message "Invalid user data"
+// @returns {object} 400 - Returns an object that returns a message "something went wrong"
+// @returns {object} 500 - Returns an object that returns a message "User already exists"
 const registerUser = async (req, res) => {
 
     const { username, email, password } = req.body;
@@ -47,8 +53,6 @@ const registerUser = async (req, res) => {
             password
         });
 
-        // generateToken(res, user._id);
-
         if (user) {
             res.status(201).send({ message: "User created" });
         } else
@@ -63,6 +67,7 @@ const registerUser = async (req, res) => {
 // @desc Logout user
 // route POST /api/users/logout
 // @accesss Public
+// @returns {object} 200 - Returns an object that returns a message "User logged out"
 const logoutUser = async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
@@ -74,6 +79,7 @@ const logoutUser = async (req, res) => {
 // @desc Update user avatar
 // route Put /api/users/avatar
 // @accesss Private
+// @returns {object} 202 - Returns an object that returns a JSON with profileAvatar Index
 const updateAvatar = async (req, res) => {
 
     const { index } = req.body;
@@ -86,6 +92,8 @@ const updateAvatar = async (req, res) => {
 // @desc Get user profile
 // route GET /api/users/user
 // @accesss Public
+// @returns {object} 202 - Returns an object that returns a JSON with profileAvatar Index and username
+// @returns {object} 400 - Returns an object that returns a message "something went wrong"
 const getUser = async (req, res) => {
 
     const { username } = req.query;
@@ -98,6 +106,7 @@ const getUser = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        res.status(400).send({ message: "something went wrong" });
     };
 };
 

@@ -2,6 +2,12 @@ import Post from '../models/postModel.js';
 import Comment from '../models/commentModel.js';
 
 
+// @desc This API Creates a Post in DB
+// route POST /api/posts/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns a message 
+// @returns {object} 400 - Returns an object that returns a message "empty input field"
+// @returns {object} 500 - Returns an object that returns a message "something went wrong"
 const createPost = async (req, res) => {
 
     const { message } = req.body;
@@ -22,6 +28,11 @@ const createPost = async (req, res) => {
     };
 };
 
+// @desc This API Get all Posts from DB
+// route GET /api/posts/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns a message 
+// @returns {object} 500 - Returns an object that returns a message "Internal Server Error"
 const getPost = async (req, res) => {
 
     try {
@@ -29,10 +40,16 @@ const getPost = async (req, res) => {
         res.status(200).send(posts);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send({ message: "Internal Server Error" });
     };
 };
 
+// @desc This API Deletes a Post from DB
+// route GET /api/posts/
+// @accesss Private
+// @returns {object} 200 - Returns an object that returns a message 
+// @returns {object} 500 - Returns an object that returns a message "something went wrong"
+// @returns {object} 500 - Returns an object that returns a message "Internal Server Error"
 const deletePost = async (req, res) => {
 
     if (req.query.userId !== req.user._id.toString())
@@ -45,7 +62,7 @@ const deletePost = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send({ message: "Internal Server Error" });
     };
 };
 
