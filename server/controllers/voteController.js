@@ -28,10 +28,10 @@ const votePost = async (req, res) => {
                     await voteExists.save();
                 }
 
-                const test = voteExists.userId.map(e => e.userId);
+                const usersArray = voteExists.userId.map(e => e.userId);
                 let result = 10;
                 for (let index = 0; index < voteExists.userId.length; index++) {
-                    const element = test[index];
+                    const element = usersArray[index];
                     if (element === userId) {
                         result = index;
                     }
@@ -53,10 +53,10 @@ const votePost = async (req, res) => {
                     await voteExists.save();
                 }
 
-                const test = voteExists.userId.map(e => e.userId);
+                const userArray = voteExists.userId.map(e => e.userId);
                 let result = 10;
                 for (let index = 0; index < voteExists.userId.length; index++) {
-                    const element = test[index];
+                    const element = userArray[index];
                     if (element === userId) {
                         result = index
                     }

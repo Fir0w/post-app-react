@@ -5,9 +5,16 @@ const PostsList = ({ setPostFormContent, postContent }) => {
 
     return (
 
-
         postContent.map((post) => {
-            return <Post key={post._id} setPostFormContent={setPostFormContent} userId={post.userId} postId={post._id} profileName={post.profileName} postContent={post.postContent} comment={`${post.commentsCount} comments`} timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
+            return <Post
+                key={post._id}
+                setPostFormContent={setPostFormContent}
+                userId={post.userId}
+                postId={post._id}
+                profileName={post.profileName}
+                postContent={post.postContent}
+                comment={`${post.commentsCount} comments`}
+                timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
         }).reverse()
     );
 };

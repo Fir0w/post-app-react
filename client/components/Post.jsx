@@ -46,8 +46,8 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
 
         try {
             await axios.post(`/api/posts/vote`, { postId, userId: user.userId, voteOption });
-            const reponse = await axios.get(`/api/posts/vote?postId=${postId}`);
-            setUpvote(reponse.data.vote);
+            const response = await axios.get(`/api/posts/vote?postId=${postId}`);
+            setUpvote(response.data.vote);
         } catch (error) {
             console.log(error)
         }
