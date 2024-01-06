@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import styles from './PostPage.module.css';
-import leftArrow from '../src/assets/leftArrow.svg';
+import leftArrow from '../assets/leftArrow.svg';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import useAuth from './useAuthContext';

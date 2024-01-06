@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Signup from '../components/Signup';
-import LandingPage from '../components/LandingPage';
-import Login from '../components/Login';
-import Home from '../components/Home';
-import PageNotFound from '../components/PageNotFound';
-import PostPage from '../components/PostPage';
-import Profile from '../components/Profile';
-import useAuthContext from '../components/useAuthContext';
-import Avatar from '../components/Avatar';
+import Signup from './components/Signup';
+import LandingPage from './components/LandingPage';
+import Login from './components/Login';
+import Home from './components/Home';
+import PageNotFound from './components/PageNotFound';
+import PostPage from './components/PostPage';
+import Profile from './components/Profile';
+import useAuthContext from './components/useAuthContext';
+import Avatar from './components/Avatar';
 import './App.css';
 
 

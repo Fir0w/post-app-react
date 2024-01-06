@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validateEmail, validatePassword, validateUsername } from '../src/utils/validateInput';
+import { validateEmail, validatePassword, validateUsername } from '../utils/validateInput';
 import axios from 'axios';
 import styles from './Signup.module.css';
 
