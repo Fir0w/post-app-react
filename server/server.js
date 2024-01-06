@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -16,6 +17,15 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+if (process.env.NODE_ENV === 'production') {
+    const __dirname = path.resolve();
+    app.use(express.static(path.join(__dirname, 'client/dist')));
+
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html')));
+} else {
+    app.get('/', (req, res) => res.send('server is ready'));
+};
 
 app.use(cookieParser());
 
