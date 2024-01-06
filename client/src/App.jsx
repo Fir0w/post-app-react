@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Signup from '../components/Signup';
-import Index from '../components/Index';
+import LandingPage from '../components/LandingPage';
 import Login from '../components/Login';
 import Home from '../components/Home';
 import PageNotFound from '../components/PageNotFound';
@@ -18,7 +18,7 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={!user ? <Index /> : <Navigate to="/home" replace />} />
+            <Route path="/" element={!user ? <LandingPage /> : <Navigate to="/home" replace />} />
             <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/home" replace />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/home" replace />} />
             <Route path="/home" element={user ? <Home /> : <Navigate to="/" replace />} />

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './index.module.css';
+import styles from './LandingPage.module.css';
 
 
-const Index = () => {
+const LandingPage = () => {
 
     const navigate = useNavigate();
 
@@ -21,4 +21,4 @@ const Index = () => {
 };
 
 
-export default Index;
+export default LandingPage;
