@@ -9,6 +9,8 @@ import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
 
 
+const port = process.env.PORT || 5000;
+
 dotenv.config();
 
 connectDB();
@@ -17,6 +19,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
+
+app.use('/api/posts', postRoutes);
+app.use('/api/posts/vote', voteRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/comments', commentRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     const __dirname = path.resolve();
@@ -27,12 +36,4 @@ if (process.env.NODE_ENV === 'production') {
     app.get('/', (req, res) => res.send('server is ready'));
 };
 
-app.use(cookieParser());
-
-app.use('/api/posts', postRoutes);
-app.use('/api/posts/vote', voteRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/comments', commentRoutes);
-
-
-app.listen(5000, () => console.log(`server is running on http://localhost:5000`));
+app.listen(port, () => console.log(`server is running on http://localhost:5000`));
