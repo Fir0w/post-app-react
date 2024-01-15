@@ -39,7 +39,6 @@ const getPost = async (req, res) => {
         const posts = await Post.find(req.query.postId ? { '_id': req.query.postId } : {});
         res.status(200).send(posts);
     } catch (error) {
-        console.error(error);
         res.status(500).send({ message: "Internal Server Error" });
     };
 };

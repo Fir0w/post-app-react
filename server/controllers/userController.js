@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
         return res.status(400).send({ message: "User already exists" });
     };
 
-    if (!validateUsername(username) && !validateEmail(email) && !validatePassword(password))
+    if (!(validateUsername(username) && validateEmail(email) && validatePassword(password)))
         return res.status(400).send({ message: "Invalid user data" });
 
     try {
@@ -99,7 +99,7 @@ const getUser = async (req, res) => {
 
     const { username } = req.query;
     try {
-        const user = await User.findOne({ "username": username });
+        const user = await User.findOne({ username });
         res.status(202).json({
             profileAvatar: user?.profileAvatar,
             username
