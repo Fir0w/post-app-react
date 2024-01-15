@@ -11,33 +11,41 @@ import CommentsList from './CommentsList';
 
 const PostPage = () => {
 
-    const data = {
-        upVote: "Up Vote",
-        downVote: "Down Vote",
-    };
-
-    const [postContent, setPostContent] = useState([]);
+    const [postContent, setPostContent] = useState(true);
     const [comment, setComment] = useState([]);
     const [commentUpdate, setCommentUpdate] = useState(false);
     const [profile, setProfile] = useState({ profileAvatar: 1 });
+    const [upvote, setUpvote] = useState([]);
+    const [selection, setSelection] = useState('unvote');
 
     const navigate = useNavigate();
     const { postId } = useParams();
     const { user } = useAuth();
 
+    const voteSelection = useCallback((response) => {
+        const userIndex = response.data.vote.userId.map(e => e.userId).indexOf(user.userId);
+        if (response.data.vote.userId[userIndex]?.voteOption === 'upvote')
+            setSelection('upvote');
+        else if (response.data.vote.userId[userIndex]?.voteOption === 'downvote')
+            setSelection('downvote');
+        else setSelection('unvote');
+    }, [user.userId])
+
     const getPost = useCallback(async () => {
 
         try {
-            const req = await axios.get(`/api/posts/?postId=${postId}`);
-            if (!req.data[0])
-                return setPostContent('');
-            const res = await axios.get(`/api/users/user?username=${req.data[0].profileName}`);
+            const responsePost = await axios.get(`/api/posts/?postId=${postId}`);
+            const res = await axios.get(`/api/users/user?username=${responsePost.data[0].profileName}`);
+            const response = await axios.get(`/api/posts/vote?postId=${postId}`)
+            setPostContent(responsePost.data);
             setProfile(res.data);
-            setPostContent(req.data);
+            setUpvote(response.data.vote);
+            voteSelection(response);
         } catch (err) {
             console.log(err);
+            setPostContent(false);
         }
-    }, [postId]);
+    }, [postId, voteSelection]);
 
     const getAllComments = useCallback(async () => {
 
@@ -58,6 +66,18 @@ const PostPage = () => {
         try {
             await axios.delete(`/api/posts/?postId=${postId}&userId=${user.userId}`);
             navigate('/home');
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const vote = async (voteOption) => {
+
+        try {
+            await axios.post(`/api/posts/vote`, { postId, userId: user.userId, voteOption });
+            const response = await axios.get(`/api/posts/vote?postId=${postId}`);
+            setUpvote(response.data.vote);
+            voteSelection(response);
         } catch (error) {
             console.log(error)
         }
@@ -99,8 +119,9 @@ const PostPage = () => {
                             </div>
                             <div className={styles.postContent}>{postContent[0]?.postContent}</div>
                             <div className={styles.reaction}>
-                                <div>{data.upVote}</div>
-                                <div>{data.downVote}</div>
+                                <div style={selection === 'upvote' ? { color: 'green' } : {}} onClick={() => vote('upvote')}>upvote</div>
+                                <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
+                                <div style={selection === 'downvote' ? { color: 'red' } : {}} onClick={() => vote('downvote')}>downvote</div>
                                 <div className={styles.timeStamp}>{new Date(postContent[0]?.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })}</div>
                             </div>
                         </div>
