@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const commentSchema = mongoose.Schema({
     postId: {
         type: String,
@@ -18,5 +19,6 @@ const commentSchema = mongoose.Schema({
         required: true
     }
 }, { timestamps: true });
+
 
 export default mongoose.model('Comment', commentSchema);

@@ -1,27 +1,26 @@
 import { useParams } from 'react-router-dom';
-import styles from './Post.module.css';
+import styles from './Comment.module.css';
 import useAuth from './useAuthContext';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 
-const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName, postContent, upVote, downVote, timeStamp }) => {
+const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName, commentContent, timeStamp }) => {
 
     const { user } = useAuth();
     const { postId } = useParams();
     const [profile, setProfile] = useState({ profileAvatar: 1 });
 
-    const getProfile = useCallback(
-        async () => {
+    const getProfile = useCallback(async () => {
 
-            try {
-                const res = await axios.get(`/api/users/user?username=${profileName}`);
-                setProfile(res.data);
-            } catch (error) {
-                console.log(error)
-            }
-        }, [profileName]);
+        try {
+            const res = await axios.get(`/api/users/user?username=${profileName}`);
+            setProfile(res.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }, [profileName]);
 
     useEffect(() => {
         getProfile();
@@ -41,8 +40,8 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
 
 
     return (
-        <div className={styles.postContainer}>
-            <div className={styles.post}>
+        <div className={styles.commentContainer}>
+            <div className={styles.comment}>
                 <div className={styles.profileContainer}>
                     <a href={`/profile/${profileName}`}>
                         <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
@@ -62,10 +61,8 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
                             </div>
                         </div>
                     </div>
-                    <div className={styles.postContent}>{postContent}</div>
+                    <div className={styles.commentContent}>{commentContent}</div>
                     <div className={styles.reaction}>
-                        <div>{upVote}</div>
-                        <div>{downVote}</div>
                         <div className={styles.timeStamp}>{timeStamp}</div>
                     </div>
                 </div>
@@ -79,7 +76,7 @@ Comment.propTypes = {
     userId: PropTypes.string,
     postUserId: PropTypes.string,
     profileName: PropTypes.string,
-    postContent: PropTypes.string,
+    commentContent: PropTypes.string,
     upVote: PropTypes.string,
     downVote: PropTypes.string,
     commentId: PropTypes.string,

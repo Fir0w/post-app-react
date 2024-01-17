@@ -11,4 +11,5 @@ connectDB();
 
 app.listen(port, () => console.log(`server is running on http://localhost:5000`));
 
+
 export default app;

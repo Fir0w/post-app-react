@@ -7,8 +7,15 @@ const CommentsList = ({ postUserId, comment, setCommentUpdate }) => {
     return (
 
 
-        comment.map((post) => {
-            return <Comment key={post._id} setCommentUpdate={setCommentUpdate} postUserId={postUserId} userId={post.userId} commentId={post._id} profileName={post.profileName} postContent={post.postContent} upVote={'up vote'} downVote={'down vote'} timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
+        comment.map((comment) => {
+            return <Comment key={comment._id}
+                setCommentUpdate={setCommentUpdate}
+                postUserId={postUserId}
+                userId={comment.userId}
+                commentId={comment._id}
+                profileName={comment.profileName}
+                commentContent={comment.postContent}
+                timeStamp={new Date(comment.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
         }).reverse()
     );
 };
