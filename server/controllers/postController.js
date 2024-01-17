@@ -1,5 +1,6 @@
 import Post from '../models/postModel.js';
 import Comment from '../models/commentModel.js';
+import Vote from '../models/voteModel.js';
 
 
 // @desc This API Creates a Post in DB
@@ -57,6 +58,7 @@ const deletePost = async (req, res) => {
     try {
         await Post.deleteOne({ '_id': req.query.postId });
         await Comment.deleteMany({ 'postId': req.query.postId });
+        await Vote.deleteOne({ 'postId': req.query.postId });
         res.status(200).send({ message: "Post was deleted" });
 
     } catch (error) {
