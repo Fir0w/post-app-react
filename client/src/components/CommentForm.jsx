@@ -18,16 +18,15 @@ const CommentForm = ({ setCommentUpdate }) => {
     const { user } = useAuth();
     const { postId } = useParams();
 
-    const getProfile = useCallback(
-        async () => {
+    const getProfile = useCallback(async () => {
 
-            try {
-                const res = await axios.get(`/api/users/user?username=${user.username}`);
-                setProfile(res.data);
-            } catch (error) {
-                console.log(error)
-            }
-        }, [user.username]);
+        try {
+            const res = await axios.get(`/api/users/user?username=${user.username}`);
+            setProfile(res.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }, [user.username]);
 
     useEffect(() => {
         getProfile();

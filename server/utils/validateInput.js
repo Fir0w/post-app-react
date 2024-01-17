@@ -16,4 +16,5 @@ const validateUsername = (username) => {
     return regex.test(username);
 };
 
+
 export { validateEmail, validatePassword, validateUsername };
