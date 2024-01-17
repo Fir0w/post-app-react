@@ -13,18 +13,29 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
     const { user } = useAuth();
     const [profile, setProfile] = useState({ profileAvatar: 1 });
     const [upvote, setUpvote] = useState([]);
+    const [selection, setSelection] = useState('unvote');
+
+    const voteSelection = useCallback((response) => {
+        const userIndex = response.data.vote.userId.map(e => e.userId).indexOf(user.userId);
+        if (response.data.vote.userId[userIndex]?.voteOption === 'upvote')
+            setSelection('upvote');
+        else if (response.data.vote.userId[userIndex]?.voteOption === 'downvote')
+            setSelection('downvote');
+        else setSelection('unvote');
+    }, [user.userId])
 
     const getProfile = useCallback(async () => {
 
         try {
             const res = await axios.get(`/api/users/user?username=${profileName}`);
-            const reponse = await axios.get(`/api/posts/vote?postId=${postId}`)
+            const response = await axios.get(`/api/posts/vote?postId=${postId}`)
             setProfile(res.data);
-            setUpvote(reponse.data.vote);
+            setUpvote(response.data.vote);
+            voteSelection(response);
         } catch (error) {
             console.log(error)
         }
-    }, [profileName, postId]);
+    }, [profileName, postId, voteSelection]);
 
     useEffect(() => {
         getProfile();
@@ -48,6 +59,7 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
             await axios.post(`/api/posts/vote`, { postId, userId: user.userId, voteOption });
             const response = await axios.get(`/api/posts/vote?postId=${postId}`);
             setUpvote(response.data.vote);
+            voteSelection(response);
         } catch (error) {
             console.log(error)
         }
@@ -80,9 +92,9 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
                         document.getSelection().toString().length > 0 ? '' : navigate(`/post/${postId}`)
                     }}>{postContent}</div>
                     <div className={styles.reaction}>
-                        <div onClick={() => vote('upvote')}>upvote</div>
+                        <div style={selection === 'upvote' ? { color: 'green' } : {}} onClick={() => vote('upvote')}>upvote</div>
                         <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
-                        <div onClick={() => vote('downvote')}>downvote</div>
+                        <div style={selection === 'downvote' ? { color: 'red' } : {}} onClick={() => vote('downvote')}>downvote</div>
                         <div>{comment}</div>
                         <div className={styles.timeStamp}>{timeStamp}</div>
                     </div>
