@@ -47,7 +47,7 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
                         <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
                     </a>
                 </div>
-                <div>
+                <div style={{ width: '100%' }}>
                     <div className={styles.header}>
                         <a className={styles.profileName} href={`/profile/${profileName}`}>
                             <div>{profileName}</div>

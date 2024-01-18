@@ -49,7 +49,7 @@ const Navbar = () => {
                 </a>
                 <div className={styles.profile}>
                     <a className={styles.profile} href={`/profile/${user.username}`}>
-                        <img className={styles.img} src={`/profileAvatar/avatar${user.profileAvatar}.png`} width={50} alt="flaticon.com" />
+                        <img className={styles.img} src={`/profileAvatar/avatar${user.profileAvatar}.png`} alt="flaticon.com" />
                         <p>{user?.username}</p>
                     </a>
                     <button className={styles.button} onClick={logout}>Logout</button>

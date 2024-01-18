@@ -13,7 +13,7 @@ const PostsList = ({ setPostFormContent, postContent }) => {
                 postId={post._id}
                 profileName={post.profileName}
                 postContent={post.postContent}
-                comment={`${post.commentsCount} comments`}
+                comment={post.commentsCount}
                 timeStamp={new Date(post.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })} />
         }).reverse()
     );

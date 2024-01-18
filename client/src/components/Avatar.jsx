@@ -39,11 +39,11 @@ const Avatar = () => {
                                 <img src={leftArrow} alt="leftArrow" />
                             </button>
                         </Link>
+                        <h2>Choose your Avatar</h2>
                     </div>
-                    <h2>Choose your Avatar</h2>
                     <div className={styles.avatars}>
                         {Avatars.map((img, index) => {
-                            return <img key={img} src={`/profileAvatar/avatar${index + 1}.png`} alt={index + 1} width={100} onClick={() => setAvatar(index + 1)} />
+                            return <img className={styles.img} key={img} src={`/profileAvatar/avatar${index + 1}.png`} alt={index + 1} width={100} onClick={() => setAvatar(index + 1)} />
                         })}
                     </div>
                 </div>

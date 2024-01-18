@@ -23,23 +23,23 @@
 
 
 .img {
+    width: 50px;
     padding: 25px 0 25px 0;
     margin-right: 10px;
 }
 
 header {
+    width: 100%;
     left: 0;
     position: fixed;
 }
 
 .visible {
-    width: 100%;
     top: 0;
     transition: top 0.4s ease-out;
 }
 
 .hidden {
-    width: 100%;
     top: -100px;
     transition: top 0.4s ease-out;
 }
@@ -47,4 +47,14 @@ header {
 .button:focus,
 .button:focus-visible {
     outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .home>h2 {
+        font-size: 16px;
+    }
+
+    .logo {
+        width: 50px;
+    }
 }

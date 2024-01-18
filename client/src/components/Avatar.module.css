@@ -43,3 +43,35 @@
 .button:focus-visible {
     outline: none;
 }
+
+@media only screen and (max-width: 600px) {
+    .profileBox {
+        display: flex;
+        flex-direction: column;
+        margin: 120px 0 0 0;
+        border-radius: 15px;
+        width: 90%;
+        height: 40%;
+        background-color: rgb(180, 180, 180);
+    }
+
+    .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        width: 35px;
+        border-radius: 100%;
+        padding: unset;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .img {
+        width: 80px;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+}

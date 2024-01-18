@@ -4,6 +4,9 @@ import useAuth from './useAuthContext';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { VoteDown } from '../assets/chevronDown.jsx';
+import { VoteUp } from '../assets/chevronUp.jsx';
+import { Comment } from '../assets/comment.jsx';
 
 
 const Post = ({ setPostFormContent, userId, postId, profileName, postContent, comment, timeStamp }) => {
@@ -16,10 +19,10 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
     const [selection, setSelection] = useState('unvote');
 
     const voteSelection = useCallback((response) => {
-        const userIndex = response.data.vote.userId.map(e => e.userId).indexOf(user.userId);
-        if (response.data.vote.userId[userIndex]?.voteOption === 'upvote')
+        const userIndex = response.data.vote?.userId.map(e => e.userId).indexOf(user.userId);
+        if (response.data.vote?.userId[userIndex]?.voteOption === 'upvote')
             setSelection('upvote');
-        else if (response.data.vote.userId[userIndex]?.voteOption === 'downvote')
+        else if (response.data?.vote?.userId[userIndex]?.voteOption === 'downvote')
             setSelection('downvote');
         else setSelection('unvote');
     }, [user.userId])
@@ -74,7 +77,7 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
                         <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
                     </a>
                 </div>
-                <div>
+                <div style={{ width: '100%' }}>
                     <div className={styles.header}>
                         <a className={styles.profileName} href={`/profile/${profileName}`}>
                             <div>{profileName}</div>
@@ -92,10 +95,15 @@ const Post = ({ setPostFormContent, userId, postId, profileName, postContent, co
                         document.getSelection().toString().length > 0 ? '' : navigate(`/post/${postId}`)
                     }}>{postContent}</div>
                     <div className={styles.reaction}>
-                        <div style={selection === 'upvote' ? { color: 'green' } : {}} onClick={() => vote('upvote')}>upvote</div>
-                        <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
-                        <div style={selection === 'downvote' ? { color: 'red' } : {}} onClick={() => vote('downvote')}>downvote</div>
-                        <div>{comment}</div>
+                        <div className={styles.voteSection}>
+                            <div onClick={() => vote('upvote')}><VoteUp fill={selection === 'upvote' ? 'green' : '#ffffff'} /></div>
+                            <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
+                            <div onClick={() => vote('downvote')}><VoteDown fill={selection === 'downvote' ? 'red' : '#ffffff'} /></div>
+                        </div>
+                        <div className={styles.comment} onClick={() => navigate(`/post/${postId}`)}>
+                            <div style={{ margin: '0 10px 0 0' }}>{comment}</div>
+                            <Comment />
+                        </div>
                         <div className={styles.timeStamp}>{timeStamp}</div>
                     </div>
                 </div>
@@ -110,7 +118,7 @@ Post.propTypes = {
     postId: PropTypes.string,
     profileName: PropTypes.string,
     postContent: PropTypes.string,
-    comment: PropTypes.string,
+    comment: PropTypes.number,
     timeStamp: PropTypes.string
 };
 
