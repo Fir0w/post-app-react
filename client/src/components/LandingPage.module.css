@@ -36,3 +36,17 @@
     width: 200px;
     margin: 0 15px 0 15px;
 }
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        height: 150px;
+        padding: 1.5em;
+        will-change: filter;
+        transition: filter 300ms;
+    }
+
+    .button {
+        width: 150px;
+        margin: 0 15px 0 15px;
+    }
+}

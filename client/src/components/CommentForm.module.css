@@ -63,3 +63,23 @@
     padding: 0 10px 0 0;
     border-right: solid 2px;
 }
+
+@media only screen and (max-width: 600px) {
+    .postContainer {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        background-color: rgba(59, 59, 59, 0.85);
+        margin: 20px auto 0 auto;
+        border-radius: 15px;
+    }
+
+    .span {
+        margin: 14.5px 0 14.5px 0;
+        font-size: 18px;
+        white-space: pre-wrap;
+        text-align: start;
+        min-width: 90%;
+        max-width: 95%;
+    }
+}

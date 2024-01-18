@@ -96,3 +96,35 @@
     background-color: #424242;
     border-radius: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+    .commentContainer {
+        display: flex;
+        width: 90%;
+        min-height: 100px;
+        background-color: rgba(59, 59, 59, 0.85);
+        border-radius: 10px;
+        margin: 10px auto 0 auto;
+        cursor: pointer;
+    }
+
+    .comment {
+        width: 100%;
+    }
+
+    .commentContent {
+        text-align: start;
+        margin: 0 10px 0 0;
+        font-size: 18px;
+        width: 95%;
+        max-width: 250px;
+        overflow-wrap: break-word;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 95%;
+    }
+}

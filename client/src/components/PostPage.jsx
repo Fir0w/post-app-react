@@ -7,6 +7,8 @@ import { useCallback, useEffect, useState } from 'react';
 import useAuth from './useAuthContext';
 import CommentForm from './CommentForm';
 import CommentsList from './CommentsList';
+import { VoteDown } from '../assets/chevronDown.jsx';
+import { VoteUp } from '../assets/chevronUp.jsx';
 
 
 const PostPage = () => {
@@ -23,10 +25,10 @@ const PostPage = () => {
     const { user } = useAuth();
 
     const voteSelection = useCallback((response) => {
-        const userIndex = response.data.vote.userId.map(e => e.userId).indexOf(user.userId);
-        if (response.data.vote.userId[userIndex]?.voteOption === 'upvote')
+        const userIndex = response.data.vote?.userId.map(e => e.userId).indexOf(user.userId);
+        if (response.data.vote?.userId[userIndex]?.voteOption === 'upvote')
             setSelection('upvote');
-        else if (response.data.vote.userId[userIndex]?.voteOption === 'downvote')
+        else if (response.data.vote?.userId[userIndex]?.voteOption === 'downvote')
             setSelection('downvote');
         else setSelection('unvote');
     }, [user.userId])
@@ -87,49 +89,53 @@ const PostPage = () => {
     return (
         <>
             <Navbar />
-            {postContent ? <div style={{ padding: "100px 0 0 0" }}>
-                <div className={styles.postContainer}>
-                    <div className={styles.buttonContainer}>
-                        <Link to={'/home'}>
-                            <button className={styles.button}>
-                                <img src={leftArrow} alt="leftArrow" />
-                            </button>
-                        </Link>
-                        <span>Post</span>
-                    </div>
-                    <div className={styles.post}>
-                        <div className={styles.profileContainer}>
-                            <a href={`/profile/${postContent[0]?.profileName}`}>
-                                <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
-                            </a>
+            <section style={{ padding: "100px 0 30px 0" }}>
+                {postContent ? <>
+                    <div className={styles.postContainer}>
+                        <div className={styles.buttonContainer}>
+                            <Link to={'/home'}>
+                                <button className={styles.button}>
+                                    <img src={leftArrow} alt="leftArrow" />
+                                </button>
+                            </Link>
+                            <span>Post</span>
                         </div>
-                        <div>
-                            <div className={styles.header}>
-                                <a className={styles.profileName} href={`/profile/${postContent[0]?.profileName}`}>
-                                    <div>{postContent[0]?.profileName}</div>
+                        <div className={styles.post}>
+                            <div className={styles.profileContainer}>
+                                <a href={`/profile/${postContent[0]?.profileName}`}>
+                                    <img src={`/profileAvatar/avatar${profile.profileAvatar}.png`} width={50} alt="flaticon.com" />
                                 </a>
-                                <div className={styles.dropdownContainer} tabIndex="-1">
-                                    <div className={styles.threeDots}>
-                                        <div className={styles.dropdown}>
-                                            {postContent[0]?.userId === user.userId && <p className={styles.option} onClick={deletePost}>Delete</p>}
-                                            <p className={styles.option}>Report</p>
+                            </div>
+                            <div style={{ width: '100%' }}>
+                                <div className={styles.header}>
+                                    <a className={styles.profileName} href={`/profile/${postContent[0]?.profileName}`}>
+                                        <div>{postContent[0]?.profileName}</div>
+                                    </a>
+                                    <div className={styles.dropdownContainer} tabIndex="-1">
+                                        <div className={styles.threeDots}>
+                                            <div className={styles.dropdown}>
+                                                {postContent[0]?.userId === user.userId && <p className={styles.option} onClick={deletePost}>Delete</p>}
+                                                <p className={styles.option}>Report</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={styles.postContent}>{postContent[0]?.postContent}</div>
-                            <div className={styles.reaction}>
-                                <div style={selection === 'upvote' ? { color: 'green' } : {}} onClick={() => vote('upvote')}>upvote</div>
-                                <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
-                                <div style={selection === 'downvote' ? { color: 'red' } : {}} onClick={() => vote('downvote')}>downvote</div>
-                                <div className={styles.timeStamp}>{new Date(postContent[0]?.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })}</div>
+                                <div className={styles.postContent}>{postContent[0]?.postContent}</div>
+                                <div className={styles.reaction}>
+                                    <div className={styles.voteSection}>
+                                        <div onClick={() => vote('upvote')}><VoteUp fill={selection === 'upvote' ? 'green' : ''} /></div>
+                                        <div>{upvote?.votesCount ? `(${upvote?.votesCount})` : '(0)'}</div>
+                                        <div onClick={() => vote('downvote')}><VoteDown fill={selection === 'downvote' ? 'red' : ''} /></div>
+                                    </div>
+                                    <div className={styles.timeStamp}>{new Date(postContent[0]?.createdAt).toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', second: 'numeric', year: 'numeric', month: 'numeric', day: 'numeric' })}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> : <div className={styles.notexist}>Sorry Post does not exist!</div>}
-            <CommentForm setCommentUpdate={setCommentUpdate} />
-            <CommentsList setCommentUpdate={setCommentUpdate} comment={comment} postUserId={postContent[0]?.userId} />
+                </> : <div className={styles.notexist}>Sorry Post does not exist!</div>}
+                <CommentForm setCommentUpdate={setCommentUpdate} />
+                <CommentsList setCommentUpdate={setCommentUpdate} comment={comment} postUserId={postContent[0]?.userId} />
+            </section>
         </>
     );
 };

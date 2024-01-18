@@ -4,6 +4,7 @@ import useAuth from './useAuthContext';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Navbar from './Navbar';
+import leftArrow from '../assets/leftArrow.svg';
 
 
 const Profile = () => {
@@ -31,31 +32,35 @@ const Profile = () => {
             <Navbar />
             <div className={styles.profileContainer}>
                 <div className={styles.profileBox}>
-                    <div className={styles.profileImg}>
-                        <img className={styles.img} src={`/profileAvatar/avatar${profile.profileAvatar}.png`} alt="flaticon.com" />
-                        <p>{profile.username}</p>
-                        {user.username === location.pathname.substring(location.pathname.lastIndexOf('/') + 1) && <Link to={`${location.pathname}/avatar`}>
-                            <button className={styles.button}>Edit profile Avatar</button>
-                        </Link>}
+                    <div className={styles.buttonContainer}>
+                        <Link to={'/home'}>
+                            <button className={styles.buttonHome}>
+                                <img src={leftArrow} alt="leftArrow" />
+                            </button>
+                        </Link>
+                        <span>Profile</span>
                     </div>
-                    <div className={styles.profileInformation}>
-                        <div className={styles.stat}>
-                            <p>
-                                Rating
-                            </p>
-                            <p>0</p>
+                    <div className={styles.statContainer}>
+                        <div className={styles.profileImg}>
+                            <img className={styles.img} src={`/profileAvatar/avatar${profile.profileAvatar}.png`} alt="flaticon.com" />
+                            <p>{profile.username}</p>
+                            {user.username === location.pathname.substring(location.pathname.lastIndexOf('/') + 1) && <Link to={`${location.pathname}/avatar`}>
+                                <button className={styles.button}>Edit profile Avatar</button>
+                            </Link>}
                         </div>
-                        <div className={styles.stat}>
-                            <p>
-                                posts
-                            </p>
-                            <p>0</p>
-                        </div>
-                        <div className={styles.stat}>
-                            <p>
-                                comments
-                            </p>
-                            <p>0</p>
+                        <div className={styles.profileInformation}>
+                            <div className={styles.stat}>
+                                <p>Rating</p>
+                                <p>0</p>
+                            </div>
+                            <div className={styles.stat}>
+                                <p>posts</p>
+                                <p>0</p>
+                            </div>
+                            <div className={styles.stat}>
+                                <p>comments</p>
+                                <p>0</p>
+                            </div>
                         </div>
                     </div>
                 </div>
