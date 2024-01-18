@@ -58,7 +58,7 @@ const getComment = async (req, res) => {
 // @returns {object} 500 - Returns an object that returns a message "Internal Server Error"
 const deleteComment = async (req, res) => {
 
-    if ((req.query.postUserId !== req.query.userId) || (req.query.postUserId !== req.user._id.toString()))
+    if ((req.query.postUserId !== req.user._id.toString()) && (req.query.userId !== req.user._id.toString()))
         return res.status(403).send({ message: "Forbidden" });
 
     if (!await Comment.findOne({ '_id': req.query.commentId }))
