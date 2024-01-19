@@ -10,3 +10,13 @@ The project is built using NodeJS (Express), React (Vite), and MongoDB.
 5. Start the server by opening another terminal and running: `cd server; npm run dev`.
 6. Start the client by opening another terminal and running: `cd client; npm run dev`.
 7. The app should now be accessible. Enjoy posting!
+
+# How to setup .env file:
+1. Create a `.env` file in the "server" directory with the following content:
+2. NODE_ENV="development" or "production"
+   PORT="ENTER_PORT_NUMBER"
+   MONGODB_URI="MONGODB_URI_HERE"
+   MONGODB_URI_TEST="mongodb+srv://"
+   JWT_SECRET="JWT_SECRET_HERE"
+
+# Screenshots
