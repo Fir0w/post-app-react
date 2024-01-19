@@ -17,7 +17,7 @@ The project is built using NodeJS (Express), React (Vite), and MongoDB.
    PORT="ENTER_PORT_NUMBER"\
    MONGODB_URI="MONGODB_URI_HERE"\
    MONGODB_URI_TEST="mongodb+srv://"\
-   JWT_SECRET="JWT_SECRET_HERE"\
+   JWT_SECRET="JWT_SECRET_HERE"
 
 # Screenshots
 ![Screenshot 2024-01-19 125206](https://github.com/Fir0w/post-app-react/assets/77929714/93aee1d9-92c5-4762-bd86-a91384b21131)
