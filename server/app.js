@@ -6,6 +6,7 @@ import postRoutes from './routes/postRoutes.js';
 import voteRoutes from './routes/voteRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
+import cors from 'cors';
 
 
 dotenv.config();
@@ -14,10 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-});
+app.use(cors());
 
 app.use(cookieParser());
 
