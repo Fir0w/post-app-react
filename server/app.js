@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://post-app-react-z5ki.vercel.app", // Replace with your actual client domain
+    origin: "https://post-app-react-black.vercel.app", // Replace with your actual client domain
   })
 );
 app.use(express.json());
