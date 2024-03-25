@@ -6,7 +6,7 @@ import postRoutes from "./routes/postRoutes.js";
 import voteRoutes from "./routes/voteRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
-import cors from "cors";
+// import cors from "cors";
 
 dotenv.config();
 
@@ -17,11 +17,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: "https://post-app-react-black.vercel.app", // Replace with your actual client domain
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://post-app-react-black.vercel.app", // Replace with your actual client domain
+//   })
+// );
 
 app.use("/api/posts", postRoutes);
 app.use("/api/posts/vote", voteRoutes);
