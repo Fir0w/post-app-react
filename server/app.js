@@ -23,7 +23,7 @@ app.use(
   origin: "https://post-app-react-black.vercel.app", // Replace with your actual domain
   credentials: true, // Allow cookies to be sent with the requests
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"] // Allowed request headers
+  allowedHeaders: ["Content-Type", "*"] // Allowed request headers
 }));
 
 app.use("/api/posts", postRoutes);
