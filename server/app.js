@@ -38,3 +38,5 @@ if (process.env.NODE_ENV === "production") {
 } else {
   app.get("/", (req, res) => res.send("server is ready"));
 }
+
+export default app;
