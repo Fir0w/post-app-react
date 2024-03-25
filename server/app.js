@@ -19,11 +19,12 @@ app.use(cookieParser());
 
 app.use(
   cors(
-    // {
-  //   origin: "https://post-app-react-black.vercel.app", // Replace with your actual client domain
-  // }
-    )
-);
+  {
+  origin: "https://post-app-react-black.vercel.app", // Replace with your actual domain
+  credentials: true, // Allow cookies to be sent with the requests
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"] // Allowed request headers
+}));
 
 app.use("/api/posts", postRoutes);
 app.use("/api/posts/vote", voteRoutes);
