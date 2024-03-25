@@ -8,7 +8,6 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://post-app-react-z5ki-mgdy21utf-fir0ws-projects.vercel.app',
-        changeOrigin: true
       }
     }
   }
