@@ -18,12 +18,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(
-  cors(
-  {
-  origin: "https://post-app-react-black.vercel.app", // Replace with your actual domain
-  credentials: true, // Allow cookies to be sent with the requests
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-  allowedHeaders: ["Content-Type", "*"] // Allowed request headers
+  cors({
+  origin: "https://post-app-react-black.vercel.app",
+  credentials: true,
 }));
 
 app.use("/api/posts", postRoutes);
