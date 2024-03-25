@@ -6,7 +6,6 @@ import axios from 'axios';
 import App from './App'
 
 axios.defaults.baseURL = 'https://post-app-react-z5ki-mgdy21utf-fir0ws-projects.vercel.app';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
