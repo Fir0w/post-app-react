@@ -10,8 +10,7 @@ const generateToken = (res, userId) => {
         httpOnly: true,
         // secure: process.env.NODE_ENV !== 'development',
         // sameSite: 'strict',
-        sameSite: 'Lax',
-        domain: "post-app-react-black.vercel.app",
+        sameSite: 'none',
         maxAge: 30 * 24 * 60 * 60 * 1000
     });
 };
