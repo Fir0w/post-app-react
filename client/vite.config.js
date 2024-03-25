@@ -7,8 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: 'https://post-app-react-z5ki-mgdy21utf-fir0ws-projects.vercel.app',
       }
     }
   }
