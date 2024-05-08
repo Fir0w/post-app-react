@@ -15,7 +15,7 @@ const authUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-        generateToken(res, user._id);
+        res.generateToken(res, user._id);
         // res.status(202).json({
         //     message: "User Authenticated",
         //     userId: user._id,
