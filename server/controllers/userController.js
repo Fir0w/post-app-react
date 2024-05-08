@@ -15,13 +15,14 @@ const authUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-        res.generateToken(res, user._id);
-        // res.status(202).json({
-        //     message: "User Authenticated",
-        //     userId: user._id,
-        //     username: user.username,
-        //     profileAvatar: user.profileAvatar
-        // });
+        
+        res.status(202).json({
+            message: "User Authenticated",
+            userId: user._id,
+            username: user.username,
+            profileAvatar: user.profileAvatar,
+            generateToken(res, user._id)
+        });
     } else
         res.status(401).send({ message: "Invalid email or password" });
 };
