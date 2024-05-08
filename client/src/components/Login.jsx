@@ -28,7 +28,7 @@ const Login = () => {
 
         if (validateEmail(inputEmail) && validatePassword(inputPassword)) {
             try {
-                const res = await axios.post('/api/users/auth', formData);
+                const res = await axios.post('/api/users/auth', formData, { withCredentials: true });
                 dispatch({ type: 'LOGIN', payload: res.data });
                 localStorage.setItem('user', JSON.stringify(res.data))
                 navigate("/home");
