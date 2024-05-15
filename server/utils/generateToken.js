@@ -7,6 +7,7 @@ const generateToken = (res, userId) => {
     });
 
     res.cookie('jwt', token, {
+        path: '/',
         httpOnly: true,
         // secure: process.env.NODE_ENV !== 'development',
         secure: true,
