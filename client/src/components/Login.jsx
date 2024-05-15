@@ -28,7 +28,7 @@ const Login = () => {
 
         if (validateEmail(inputEmail) && validatePassword(inputPassword)) {
             try {
-                const res = await axios.post('https://post-app-react-z5ki.vercel.app/api/users/auth', formData, { withCredentials: true });
+                const res = await axios.post('/api/users/auth', formData, { withCredentials: true });
                 dispatch({ type: 'LOGIN', payload: res.data });
                 localStorage.setItem('user', JSON.stringify(res.data))
                 navigate("/home");
