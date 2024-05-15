@@ -11,8 +11,7 @@ const generateToken = (res, userId) => {
         // secure: process.env.NODE_ENV !== 'development',
         secure: true,
         sameSite: 'None',
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        Partitioned: true
+        maxAge: 30 * 24 * 60 * 60 * 1000
     });
 };
 
