@@ -15,7 +15,7 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
     const getProfile = useCallback(async () => {
 
         try {
-            const res = await axios.get(`/api/users/user?username=${profileName}`, { withCredentials: true });
+            const res = await axios.get(`/api/users/user?username=${profileName}`);
             setProfile(res.data);
         } catch (error) {
             console.log(error)
