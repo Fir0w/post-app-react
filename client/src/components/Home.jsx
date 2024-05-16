@@ -18,7 +18,7 @@ const Home = () => {
     const getAllPosts = async () => {
 
         try {
-            const req = await axios.get('/api/posts', { withCredentials: true });
+            const req = await axios.get('/api/posts');
             setPostContent(req.data);
         } catch (err) { console.log(err); }
     };
