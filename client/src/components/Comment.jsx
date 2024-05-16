@@ -15,7 +15,7 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
     const getProfile = useCallback(async () => {
 
         try {
-            const res = await axios.get(`/api/users/user?username=${profileName}`);
+            const res = await axios.get(`/api/users/user?username=${profileName}`, { withCredentials: true });
             setProfile(res.data);
         } catch (error) {
             console.log(error)
@@ -31,7 +31,7 @@ const Comment = ({ setCommentUpdate, postUserId, userId, commentId, profileName,
         setCommentUpdate(false);
 
         try {
-            await axios.delete(`/api/comments/?commentId=${commentId}&userId=${userId}&postUserId=${postUserId}&postId=${postId}`);
+            await axios.delete(`/api/comments/?commentId=${commentId}&userId=${userId}&postUserId=${postUserId}&postId=${postId}`, { withCredentials: true });
             setCommentUpdate(true);
         } catch (error) {
             console.log(error)
